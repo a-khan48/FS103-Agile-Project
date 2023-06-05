@@ -13,9 +13,9 @@ public class OrderManagement {
         this.orders = orders;
     }
 
-    public Order placeOrder(Map<MenuItems, Integer> items) {
-        Order order = new Order(items);
+    //public Order placeOrder(Map<MenuItems, Integer> items) {
+       /* Order order = new Order(items);
         orders.add(order);
-        return order;
-    }
+        return order;*/
+    //}
 }
