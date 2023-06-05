@@ -1,4 +1,4 @@
-package org.RMS;
+package org.RMS.controllers;
 
 public class TableManagement {
 }

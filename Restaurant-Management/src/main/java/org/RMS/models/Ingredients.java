@@ -1,4 +1,4 @@
-package org.RMS;
+package org.RMS.models;
 
 public class Ingredients {
 }
