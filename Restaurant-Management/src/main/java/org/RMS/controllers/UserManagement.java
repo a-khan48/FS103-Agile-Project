@@ -1,2 +1,4 @@
-package org.RMS.controllers;public class UserManagement {
+package org.RMS.controllers;
+
+public class UserManagement {
 }
