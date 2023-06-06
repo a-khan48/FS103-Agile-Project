@@ -1,4 +1,3 @@
-/*
 package org.RMS.controllers;
 
 import org.RMS.models.MenuItems;
@@ -12,6 +11,11 @@ public class OrderManagement {
     private List<Order> orders;
     private Scanner scanner;
 
+    public static void main(String[] args) {
+        OrderManagement orderManagement = new OrderManagement();
+        orderManagement.runOrderManagement();
+    }
+
     public OrderManagement() {
         orders = new ArrayList<>();
         scanner = new Scanner(System.in);
@@ -21,7 +25,9 @@ public class OrderManagement {
 
     public void runOrderManagement() {
         boolean running = true;
+       Scanner scanner = new Scanner(System.in);
         MenuManagement menuManagement = new MenuManagement();
+        menuManagement.loadMenuItems("menuItems.txt");
 
         while (running) {
             System.out.println("1. Add Menu Item to Order");
@@ -29,14 +35,18 @@ public class OrderManagement {
             System.out.println("3. Exit");
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
+            //int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
                 case 1:
-                    menuManagement.getMenuItems().toString();
+                    //scanner.nextLine();
+                    for (MenuItems items : menuManagement.getMenuItems()) {
+                        System.out.println(items.getItemName());
+                    }
                     //addMenuItemsToOrder();
                     break;
                 case 2:
-                    updateOrderStatus();
+                    //updateOrderStatus();
                     break;
                 case 3:
                     running = false;
@@ -76,4 +86,3 @@ public class OrderManagement {
         return null;
     }
 }
-*/

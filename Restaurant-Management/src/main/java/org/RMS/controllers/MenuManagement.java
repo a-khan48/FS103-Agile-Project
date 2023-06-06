@@ -117,7 +117,8 @@ public class MenuManagement {
         //System.out.println(menuManagement.getMenuItems().toString());
 
         for (MenuItems items : menuManagement.getMenuItems()) {
-            System.out.println(items);
+            System.out.println(items.getItemName());
         }
+
     }
 }
