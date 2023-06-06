@@ -35,7 +35,7 @@ public class UserManagement {
         return null; // Invalid credentials
     }
 
-    public static void UserManagementMenu() { // Login Menu (used to prevent clutter on main java class)
+    public static User UserManagementMenu() { // Login Menu (used to prevent clutter on main java class)
         UserManagement userManagement = new UserManagement();
         Scanner scanner = new Scanner(System.in);
 
@@ -47,21 +47,14 @@ public class UserManagement {
 
         User user = userManagement.login(username, password);
 
-        if (user != null) {
-            System.out.println("Login successful!");
-            if (user.getRole() == User.Role.MANAGER) {
-                System.out.println("Hello manager!");
-            } else if (user.getRole() == User.Role.STAFF) {
-                System.out.println("Hello staff!");
-            }
-        } else {
-            System.out.println("Invalid username or password!");
-        }
+//
         // THIS IS TO PROVE HASHING WORKS
         // for (User userlist : userManagement.users) {
           // System.out.println("Username: " + userlist.getUsername() + ", Hashed Password: " + userlist.getHashedPassword());
         // }
+        return user;
     }
+
 }
 
 
