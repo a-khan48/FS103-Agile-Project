@@ -1,6 +1,8 @@
 package org.RMS.models;
+import java.io.Serializable;
 import java.util.List;
-public class MenuItems {
+import java.io.*;
+public class MenuItems implements Serializable {
     private String itemName;
     private String itemDescription;
     private int preparationTime;
