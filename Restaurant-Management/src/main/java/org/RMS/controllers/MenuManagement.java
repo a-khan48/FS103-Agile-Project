@@ -1,10 +1,10 @@
 package org.RMS.controllers;
-
 import org.RMS.models.MenuItems;
-
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MenuManagement {
     private List<MenuItems> menuItems;
@@ -21,12 +21,12 @@ public class MenuManagement {
         menuItems.remove(menuItem);
     }
 
-    public void editItems(MenuItems menuItem, String newName, String newDescription, int newPrepTime, int newPrice, List<String> newIngredients) {
+    public void editItems(MenuItems menuItem, String newName, String newDescription, int newPrepTime, int newPrice, Map<String, Integer> newIngredientsMap) {
         menuItem.setItemName(newName);
         menuItem.setItemDescription(newDescription);
         menuItem.setPreparationTime(newPrepTime);
         menuItem.setItemPrice(newPrice);
-        menuItem.setIngredientsList(newIngredients);
+        menuItem.setIngredientsMap(newIngredientsMap);
     }
 
     public List<MenuItems> getMenuItems() {
@@ -66,17 +66,35 @@ public class MenuManagement {
     public static void main(String[] args) {
         MenuManagement menuManagement = new MenuManagement();
         menuManagement.loadMenuItems("menuItems.txt");
+        InventoryManagement inventoryManagement = new InventoryManagement();
 
-        // Create a list of ingredients
-        List<String> ingredients = new ArrayList<>();
-        ingredients.add("Cheese");
-        ingredients.add("Flour");
+        // Add ingredients to the inventory
+        inventoryManagement.addIngredient("Cheese", 100);
+        inventoryManagement.addIngredient("Flour", 200);
+        inventoryManagement.addIngredient("Pepperoni", 50);
 
-        // Create a menu item with the ingredients
-        MenuItems item1 = new MenuItems("Test", "test", 3, 2, ingredients);
+        // Create a map of ingredients and their quantities
+        Map<String, Integer> ingredientsMap = new HashMap<>();
+        ingredientsMap.put("Cheese", 5);
+        ingredientsMap.put("Flour", 1);
+        ingredientsMap.put("Pepperoni", 20);
+
+        // Create a menu item with the ingredients and their quantities
+        MenuItems item1 = new MenuItems("Pepperoni Pizza", "Delicious pepperoni pizza", 10, 15, ingredientsMap);
         menuManagement.addItems(item1);
 
-        System.out.println("Menu Items: ");
+        // Edit the menu item
+        String newName = "New Pizza";
+        String newDescription = "Updated pizza description";
+        int newPrepTime = 12;
+        int newPrice = 18;
+        Map<String, Integer> newIngredientsMap = new HashMap<>();
+        newIngredientsMap.put("Cheese", 3);
+        newIngredientsMap.put("Flour", 2);
+        newIngredientsMap.put("Pepperoni", 15);
+        menuManagement.editItems(item1, newName, newDescription, newPrepTime, newPrice, newIngredientsMap);
+
+        // Print the updated menu item
         List<MenuItems> menuItems = menuManagement.getMenuItems();
         for (MenuItems menuItem : menuItems) {
             System.out.println("Name: " + menuItem.getItemName());
@@ -84,11 +102,16 @@ public class MenuManagement {
             System.out.println("Prep: " + menuItem.getPreparationTime());
             System.out.println("Price: " + menuItem.getItemPrice());
             System.out.println("Ingredients List:");
-            List<String> ingredientsList = menuItem.getIngredientsList();
-            for (String ingredient : ingredientsList) {
-                System.out.println("- " + ingredient + " (Quantity: 1)");
+            Map<String, Integer> menuItemIngredientsMap = menuItem.getIngredientsMap();
+            for (Map.Entry<String, Integer> entry : menuItemIngredientsMap.entrySet()) {
+                String ingredient = entry.getKey();
+                int quantity = entry.getValue();
+                System.out.println("- " + ingredient + " (Quantity: " + quantity + ")");
             }
             System.out.println();
         }
+
+        // Save the updated menu items
         menuManagement.saveMenuItems("menuItems.txt");
-    }}
+    }
+}
