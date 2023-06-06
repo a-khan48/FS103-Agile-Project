@@ -19,11 +19,11 @@ public class Main {
 
             switch (user.getRole()) {
                 case MANAGER:
-                    System.out.println("Hello manager!");
+                    System.out.println("Hello Manager!");
                     handleActions(true);
                     break;
                 case STAFF:
-                    System.out.println("Hello staff!");
+                    System.out.println("Hello Staff!");
                     handleActions(false);
                     break;
             }
@@ -76,7 +76,7 @@ public class Main {
                     if (isManager) {
                         // Sales Report
                         SalesReportManagement salesReportManagement = new SalesReportManagement();
-                        // salesreportmethod()
+                        salesReportManagement.generateReport();
                     } else {
                         System.out.println("Invalid choice. Please try again.");
                     }

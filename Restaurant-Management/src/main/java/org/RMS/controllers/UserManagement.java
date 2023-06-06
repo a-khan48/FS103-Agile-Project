@@ -23,6 +23,7 @@ public class UserManagement {
         users.add(new User("Manager4", PasswordHasher.hash("10"), User.Role.MANAGER));
         users.add(new User("Manager5", PasswordHasher.hash("11"), User.Role.MANAGER));
         users.add(new User("Manager6", PasswordHasher.hash("12"), User.Role.MANAGER));
+
     }
 
     public User login(String username, String password) {
