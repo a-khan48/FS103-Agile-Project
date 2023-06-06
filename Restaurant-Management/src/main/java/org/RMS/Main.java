@@ -39,11 +39,10 @@ public class Main {
             System.out.println("Select an option:");
             System.out.println("1. Menu Management (Add, Remove, Edit menu items)");
             System.out.println("2. Enter Order For Customer (Order Processing)");
-            System.out.println("3. Reserve Table");
-            System.out.println("4. Table Status");
-            System.out.println("5. Inventory Tracker");
+            System.out.println("3. Table Options");
+            System.out.println("4. Inventory Tracker");
             if (isManager) {
-                System.out.println("6. Sales Report");
+                System.out.println("5. Sales Report");
             }
             System.out.println("0. Exit");
 
@@ -69,10 +68,6 @@ public class Main {
                     // Tablestatus?()
                     break;
                 case 5:
-                    // Inventory Tracker
-                    // InventoryManagementMethod()
-                    break;
-                case 6:
                     if (isManager) {
                         // Sales Report
                         SalesReportManagement salesReportManagement = new SalesReportManagement();

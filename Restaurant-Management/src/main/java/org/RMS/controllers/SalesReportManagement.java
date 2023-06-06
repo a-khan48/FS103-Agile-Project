@@ -7,6 +7,7 @@ public class SalesReportManagement {
         System.out.println("Hello, this is salesreportmanagement");
     }
 
+
     public void generateReport() {
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -18,7 +19,7 @@ public class SalesReportManagement {
             System.out.println("3. Table With Most Orders");
 
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine(); // Consume the newline character due to INT*
 
             switch (choice) {
                 case 1:
