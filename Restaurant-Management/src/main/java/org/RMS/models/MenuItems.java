@@ -1,18 +1,23 @@
 package org.RMS.models;
+import org.RMS.controllers.InventoryManagement;
+
+import java.io.Serializable;
 import java.util.List;
-public class MenuItems {
+import java.util.Map;
+public class MenuItems implements Serializable {
     private String itemName;
     private String itemDescription;
     private int preparationTime;
     private int itemPrice;
-    private List<String> ingredientsList;
+    private Map<String, Integer> ingredientsMap;
 
-    public MenuItems(String itemName, String itemDescription, int preparationTime, int itemPrice, List<String> ingredientsList) {
+    public MenuItems(String itemName, String itemDescription, int preparationTime, int itemPrice, Map<String, Integer> ingredientsMap) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.preparationTime = preparationTime;
         this.itemPrice = itemPrice;
-        this.ingredientsList = ingredientsList;
+        this.ingredientsMap = ingredientsMap;
+
     }
 
     public String getItemName() {
@@ -47,11 +52,18 @@ public class MenuItems {
         this.itemPrice = itemPrice;
     }
 
-    public List<String> getIngredientsList() {
-        return ingredientsList;
+    public Map<String, Integer> getIngredientsMap() {
+        return ingredientsMap;
     }
 
-    public void setIngredientsList(List<String> ingredientsList) {
-        this.ingredientsList = ingredientsList;
+    public void setIngredientsMap(Map<String, Integer> ingredientsMap) {
+        this.ingredientsMap = ingredientsMap;
+    }
+    public void deductIngredientsFromInventory(InventoryManagement inventoryManagement) {
+        for (Map.Entry<String, Integer> entry : ingredientsMap.entrySet()) {
+            String ingredient = entry.getKey();
+            int quantity = entry.getValue();
+            inventoryManagement.removeIngredient(ingredient, quantity);
+        }
     }
 }
