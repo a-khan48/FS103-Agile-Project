@@ -5,6 +5,8 @@ import org.RMS.controllers.SalesReportManagement;
 import org.RMS.controllers.TableManagement;
 import org.RMS.controllers.UserManagement;
 import org.RMS.models.User;
+import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -14,26 +16,79 @@ public class Main {
 
         if (user != null) {
             System.out.println("Login successful!");
-            if (user.getRole() == User.Role.MANAGER) {
-                System.out.println("Hello manager!");
-                TableManagement tableManagement = new TableManagement();
-                MenuManagement menuManagement = new MenuManagement();
-                TableManagement.justtext(); // Always accessible
-                menuManagement.displayMenu(); // Accessible to staff and manager
-                SalesReportManagement salesReportManagement = new SalesReportManagement();
-                salesReportManagement.generateReport(); // Accessible to manager only
-            } else if (user.getRole() == User.Role.STAFF) {
-                System.out.println("Hello staff!");
-                TableManagement tableManagement = new TableManagement();
-                MenuManagement menuManagement = new MenuManagement();
-                TableManagement.justtext(); // Always accessible
-                menuManagement.displayMenu(); // Accessible to staff and manager
+
+            switch (user.getRole()) {
+                case MANAGER:
+                    System.out.println("Hello manager!");
+                    handleActions(true);
+                    break;
+                case STAFF:
+                    System.out.println("Hello staff!");
+                    handleActions(false);
+                    break;
             }
         } else {
             System.out.println("Invalid username or password!");
         }
+    }
 
+    private static void handleActions(boolean isManager) {
+        Scanner scanner = new Scanner(System.in);
 
+        while (true) {
+            System.out.println("Select an option:");
+            System.out.println("1. Menu Management (Add, Remove, Edit menu items)");
+            System.out.println("2. Enter Order For Customer (Order Processing)");
+            System.out.println("3. Reserve Table");
+            System.out.println("4. Table Status");
+            System.out.println("5. Inventory Tracker");
+            if (isManager) {
+                System.out.println("6. Sales Report");
+            }
+            System.out.println("0. Exit");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character since it is INT scanner
+
+            switch (choice) {
+                case 1:
+                    // Menu Management
+                    MenuManagement menuManagement = new MenuManagement();
+                    // menuManagementMethod()
+                    break;
+                case 2:
+                    // Enter Order For Customer
+                    // OrderProcessingMethod()
+                    break;
+                case 3:
+                    // Reserve Table
+                    // TableManagementMethod()
+                    break;
+                case 4:
+                    // Table Status
+                    // Tablestatus?()
+                    break;
+                case 5:
+                    // Inventory Tracker
+                    // InventoryManagementMethod()
+                    break;
+                case 6:
+                    if (isManager) {
+                        // Sales Report
+                        SalesReportManagement salesReportManagement = new SalesReportManagement();
+                        // salesreportmethod()
+                    } else {
+                        System.out.println("Invalid choice. Please try again.");
+                    }
+                    break;
+                case 0:
+                    // Exit
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
     }
 }
 
