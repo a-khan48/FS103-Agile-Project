@@ -11,13 +11,13 @@ public class UserManagement {
 
     public UserManagement() {
         users = new ArrayList<>();
-        users.add(new User("Staff1", PasswordHasher.hash("password1"), User.Role.STAFF));
+        users.add(new User("Staff", PasswordHasher.hash("Staff"), User.Role.STAFF));
         users.add(new User("Staff2", PasswordHasher.hash("2"), User.Role.STAFF));
         users.add(new User("Staff3", PasswordHasher.hash("3"), User.Role.STAFF));
         users.add(new User("Staff4", PasswordHasher.hash("4"), User.Role.STAFF));
         users.add(new User("Staff5", PasswordHasher.hash("5"), User.Role.STAFF));
         users.add(new User("Staff6", PasswordHasher.hash("6"), User.Role.STAFF));
-        users.add(new User("Manager1", PasswordHasher.hash("password7"), User.Role.MANAGER));
+        users.add(new User("Manager", PasswordHasher.hash("Manager"), User.Role.MANAGER));
         users.add(new User("Manager2", PasswordHasher.hash("8"), User.Role.MANAGER));
         users.add(new User("Manager3", PasswordHasher.hash("9"), User.Role.MANAGER));
         users.add(new User("Manager4", PasswordHasher.hash("10"), User.Role.MANAGER));
