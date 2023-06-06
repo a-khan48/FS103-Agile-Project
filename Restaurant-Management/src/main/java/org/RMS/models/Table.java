@@ -10,11 +10,6 @@ public class Table {
     private int tableSize;
     private int status;
 
-    public static void main(String[] args) {
-        TableManagement tables = new TableManagement();
-        tables.generateTables();
-        tables.menu();
-    }
 
     public Table(int tableID, int tableSize) {
         this.tableID = tableID;

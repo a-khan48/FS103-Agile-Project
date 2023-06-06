@@ -11,8 +11,10 @@ public class TableManagement {
     // temp main method for testing
     public static void main(String[] args) {
 
-        TableManagement tableManagement = new TableManagement();
-        tableManagement.generateTables();
+
+
+
+
 
 
 
