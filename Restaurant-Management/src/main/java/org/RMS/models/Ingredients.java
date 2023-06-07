@@ -4,7 +4,7 @@ package org.RMS.models;
 import org.RMS.controllers.InventoryManagement;
 
 public class Ingredients {
-    private String name;
+   private String name;
     public int count;
 
     public Ingredients (String name, int count) {
@@ -20,7 +20,7 @@ public class Ingredients {
         return count;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         // Create an instance of the InventoryManagement class
         InventoryManagement inventoryManagement = new InventoryManagement();
 
@@ -63,5 +63,7 @@ public class Ingredients {
 
         // Alert for low inventory
         inventoryManagement.alertLowIngredients(10);
-    }
+        System.out.println(); // Add a newline for better readability
+        inventoryManagement.displayOptions(); // Call the displayOptions method from the InventoryManagement class
+    }*/
 }
