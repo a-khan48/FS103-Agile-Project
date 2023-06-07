@@ -2,16 +2,15 @@ package org.RMS.models;
 import org.RMS.controllers.InventoryManagement;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 public class MenuItems implements Serializable {
     private String itemName;
     private String itemDescription;
     private int preparationTime;
-    private int itemPrice;
+    private double itemPrice;
     private Map<String, Integer> ingredientsMap;
 
-    public MenuItems(String itemName, String itemDescription, int preparationTime, int itemPrice, Map<String, Integer> ingredientsMap) {
+    public MenuItems(String itemName, String itemDescription, int preparationTime, double itemPrice, Map<String, Integer> ingredientsMap) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.preparationTime = preparationTime;
@@ -44,11 +43,11 @@ public class MenuItems implements Serializable {
         this.preparationTime = preparationTime;
     }
 
-    public int getItemPrice() {
+    public double getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(int itemPrice) {
+    public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
     }
 

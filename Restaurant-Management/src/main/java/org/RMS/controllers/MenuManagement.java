@@ -21,7 +21,7 @@ public class MenuManagement {
         menuItems.remove(menuItem);
     }
 
-    public void editItems(MenuItems menuItem, String newName, String newDescription, int newPrepTime, int newPrice, Map<String, Integer> newIngredientsMap) {
+    public void editItems(MenuItems menuItem, String newName, String newDescription, int newPrepTime, double newPrice, Map<String, Integer> newIngredientsMap) {
         menuItem.setItemName(newName);
         menuItem.setItemDescription(newDescription);
         menuItem.setPreparationTime(newPrepTime);

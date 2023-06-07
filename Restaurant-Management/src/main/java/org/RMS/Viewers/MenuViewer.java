@@ -60,7 +60,7 @@ public class MenuViewer {
                     exit = true;
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(ANSI_RED + "Invalid choice. Please try again." + ANSI_RESET);
                     break;
             }
 
