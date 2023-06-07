@@ -9,8 +9,6 @@ import java.util.Scanner;
 import java.util.HashMap;
 import java.util.Map;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class OrderManagement {
     private Map<Integer, Order> orders;
@@ -76,6 +74,10 @@ public class OrderManagement {
     }
 
     private void createOrder() {
+        System.out.println("Enter the table number:");
+        int tableNumber = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character due to INT*
+
         // Generate the order ID based on the size of the map
         int orderId = orders.size() + 1;
 
@@ -84,6 +86,7 @@ public class OrderManagement {
         double totalPrice = 0.0;
         String status = "Waiting";
         Order order = new Order(orderId, itemsOrdered, totalPrice, status);
+        order.setTableID(tableNumber);
 
         // Add the order to the map
         orders.put(order.getOrderId(), order);
@@ -196,9 +199,11 @@ public class OrderManagement {
         Order order = getOrderById(orderId);
         if (order != null) {
             System.out.println("Order ID: " + order.getOrderId());
+            System.out.println("Table: " + order.getTableID());
             System.out.println("Items Ordered: " + order.getItemsOrdered());
             System.out.println("Total Price: " + order.getTotalPrice());
             System.out.println("Status: " + order.getStatus());
+
         } else {
             System.out.println("Order not found.");
         }
