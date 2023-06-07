@@ -65,4 +65,12 @@ public class MenuItems implements Serializable {
             inventoryManagement.removeIngredient(ingredient, quantity);
         }
     }
+    @Override
+    public String toString() {
+        return "Menu Item: " + itemName + "\n" +
+                "Description: " + itemDescription + "\n" +
+                "Preparation Time: " + preparationTime + " minutes\n" +
+                "Price: $" + itemPrice + "\n" +
+                "Ingredients: " + ingredientsMap.toString();
+    }
 }

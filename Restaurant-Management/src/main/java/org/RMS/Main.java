@@ -1,10 +1,7 @@
 package org.RMS;
 
 import org.RMS.Viewers.MenuViewer;
-import org.RMS.controllers.MenuManagement;
-import org.RMS.controllers.SalesReportManagement;
-import org.RMS.controllers.TableManagement;
-import org.RMS.controllers.UserManagement;
+import org.RMS.controllers.*;
 import org.RMS.models.User;
 import java.util.Scanner;
 
@@ -59,16 +56,17 @@ public class Main {
                     menuViewer.main(args);
                     break;
                 case 2:
-                    // Enter Order For Customer
-                    // OrderProcessingMethod()
+                    OrderManagement orderManagement = new OrderManagement();
+                    orderManagement.handleOrderProcessing();
                     break;
                 case 3:
                     // Reserve Table
+                    TableManagement tableManagement = new TableManagement();
                     // TableManagementMethod()
                     break;
                 case 4:
-                    // Table Status
-                    // Tablestatus?()
+                    // Inventory Tracker?
+                    //
                     break;
                 case 5:
                     if (isManager) {
