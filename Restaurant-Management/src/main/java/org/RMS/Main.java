@@ -33,6 +33,8 @@ public class Main {
 
     private static void handleActions(boolean isManager) {
         Scanner scanner = new Scanner(System.in);
+        OrderManagement orderManagement = new OrderManagement();
+        SalesReportManagement reportManagement = new SalesReportManagement(orderManagement);
 
         while (true) {
             System.out.println("Select an option:");
@@ -56,7 +58,7 @@ public class Main {
                     menuViewer.main(args);
                     break;
                 case 2:
-                    OrderManagement orderManagement = new OrderManagement();
+//                    OrderManagement orderManagement = new OrderManagement();
                     orderManagement.handleOrderProcessing();
                     break;
                 case 3:
@@ -74,8 +76,8 @@ public class Main {
                 case 5:
                     if (isManager) {
                         // Sales Report
-                        SalesReportManagement salesReportManagement = new SalesReportManagement();
-                        salesReportManagement.generateReport();
+
+                        reportManagement.generateReport();
                     } else {
                         System.out.println("Invalid choice. Please try again.");
                     }

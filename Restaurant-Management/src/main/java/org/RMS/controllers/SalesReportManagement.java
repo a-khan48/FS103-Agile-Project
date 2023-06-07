@@ -3,10 +3,11 @@ package org.RMS.controllers;
 import java.util.Scanner;
 
 public class SalesReportManagement {
-    public static void main(String[] args) {
-        System.out.println("Hello, this is salesreportmanagement");
-    }
+    private OrderManagement orderManagement;
 
+    public SalesReportManagement(OrderManagement orderManagement) {
+        this.orderManagement = orderManagement;
+    }
 
     public void generateReport() {
         Scanner scanner = new Scanner(System.in);
@@ -24,7 +25,8 @@ public class SalesReportManagement {
             switch (choice) {
                 case 1:
                     // Perform total revenue calculation
-                    System.out.println("Calculating total revenue...");
+                    double totalRevenue = orderManagement.calculateTotalRevenue();
+                    System.out.println("Total Revenue: $" + totalRevenue);
                     // Method()
                     return; // Exit the method
                 case 2:

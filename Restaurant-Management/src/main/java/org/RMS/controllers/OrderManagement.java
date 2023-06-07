@@ -245,6 +245,16 @@ public class OrderManagement {
         System.out.println("Total Price: " + retrievedOrder.getTotalPrice());
         System.out.println("Status: " + retrievedOrder.getStatus());
     }
+
+    public double calculateTotalRevenue() {
+        double totalRevenue = 0.0;
+        for (Order order : orders.values()) {
+            totalRevenue += order.getTotalPrice();
+        }
+        return totalRevenue;
+    }
+
+
 }
 
 
