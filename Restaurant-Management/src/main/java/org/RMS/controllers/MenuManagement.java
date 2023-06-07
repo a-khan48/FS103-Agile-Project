@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MenuManagement {
-    private List<MenuItems> menuItems;
+    private static List<MenuItems> menuItems;
 
     public MenuManagement() {
         this.menuItems = new ArrayList<>();
@@ -29,7 +29,7 @@ public class MenuManagement {
         menuItem.setIngredientsMap(newIngredientsMap);
     }
 
-    public List<MenuItems> getMenuItems() {
+    public static List<MenuItems> getMenuItems() {
         return menuItems;
     }
 
