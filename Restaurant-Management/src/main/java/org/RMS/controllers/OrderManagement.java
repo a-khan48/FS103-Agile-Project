@@ -76,6 +76,10 @@ public class OrderManagement {
     }
 
     private void createOrder() {
+        System.out.println("Enter the table number:");
+        int tableNumber = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character due to INT*
+
         // Generate the order ID based on the size of the map
         int orderId = orders.size() + 1;
 
@@ -84,6 +88,7 @@ public class OrderManagement {
         double totalPrice = 0.0;
         String status = "Waiting";
         Order order = new Order(orderId, itemsOrdered, totalPrice, status);
+        order.setTableID(tableNumber);
 
         // Add the order to the map
         orders.put(order.getOrderId(), order);
