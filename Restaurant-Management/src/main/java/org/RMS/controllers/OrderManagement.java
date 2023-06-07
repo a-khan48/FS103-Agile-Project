@@ -89,6 +89,30 @@ public class OrderManagement {
         orders.put(order.getOrderId(), order);
 
         System.out.println("Order created successfully. Order ID: " + orderId);
+
+
+            System.out.println("Current Menu Items:");
+
+            List<MenuItems> menuItems = MenuManagement.getMenuItems();
+            for (int i = 0; i < menuItems.size(); i++) {
+                MenuItems menuItem = menuItems.get(i);
+                System.out.println((i + 1) + ". " + menuItem.getItemName());
+            }
+
+            System.out.println("Select a menu item to add to the order (enter the item number):");
+            int menuItemNumber = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character due to INT*
+
+            if (menuItemNumber >= 1 && menuItemNumber <= menuItems.size()) {
+                MenuItems selectedMenuItem = menuItems.get(menuItemNumber - 1);
+                order.getItemsOrdered().add(selectedMenuItem);
+                double newPrice = order.getTotalPrice();
+                order.setTotalPrice(newPrice+=selectedMenuItem.getItemPrice());
+                System.out.println("Menu item added to the order successfully.");
+            } else {
+                System.out.println("Invalid menu item number. Item not added to the order.");
+            }
+
     }
 
 
@@ -114,6 +138,8 @@ public class OrderManagement {
             if (menuItemNumber >= 1 && menuItemNumber <= menuItems.size()) {
                 MenuItems selectedMenuItem = menuItems.get(menuItemNumber - 1);
                 order.getItemsOrdered().add(selectedMenuItem);
+                double newPrice = order.getTotalPrice();
+                order.setTotalPrice(newPrice+=selectedMenuItem.getItemPrice());
                 System.out.println("Menu item added to the order successfully.");
             } else {
                 System.out.println("Invalid menu item number. Item not added to the order.");
