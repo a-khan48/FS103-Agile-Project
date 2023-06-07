@@ -61,8 +61,9 @@ public class Main {
                     break;
                 case 3:
                     // Reserve Table
-                    TableManagement tableManagement = new TableManagement();
-                    // TableManagementMethod()
+                    TableManagement tables = new TableManagement();
+                    tables.generateTables();
+                    tables.menu();
                     break;
                 case 4:
                     // Inventory Tracker?
