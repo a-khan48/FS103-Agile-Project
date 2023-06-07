@@ -1,5 +1,6 @@
 package org.RMS;
 
+import org.RMS.Viewers.MenuViewer;
 import org.RMS.controllers.MenuManagement;
 import org.RMS.controllers.SalesReportManagement;
 import org.RMS.controllers.TableManagement;
@@ -52,8 +53,9 @@ public class Main {
             switch (choice) {
                 case 1:
                     // Menu Management
-                    MenuManagement menuManagement = new MenuManagement();
-                    // menuManagementMethod()
+                    MenuViewer menuViewer = new MenuViewer();
+                    String[] args = {};
+                    menuViewer.main(args);
                     break;
                 case 2:
                     // Enter Order For Customer
