@@ -12,12 +12,6 @@ public class TableManagement {
     public static void main(String[] args) {
 
 
-
-
-
-
-
-
     }
     private List<Table> tables;
 
@@ -42,7 +36,7 @@ public class TableManagement {
                     break;
                 case 3:
                     System.out.println("Exiting...");
-                    System.exit(0);
+                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
@@ -60,14 +54,20 @@ public class TableManagement {
     }
 
     public void generateTables(){
-        Table table1 = new Table(1, 4);
+        Table table1 = new Table(1, 2);
         Table table2 = new Table(2, 2);
-        Table table3 = new Table(3, 6);
+        Table table3 = new Table(3, 4);
+        Table table4 = new Table(4, 4);
+        Table table5 = new Table(5, 8);
+        Table table6 = new Table(6, 8);
 
         //adding tables to list
         addTable(table1);
         addTable(table2);
         addTable(table3);
+        addTable(table4);
+        addTable(table5);
+        addTable(table6);
 
     }
 
