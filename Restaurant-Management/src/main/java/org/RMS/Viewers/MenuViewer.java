@@ -9,23 +9,33 @@ public class MenuViewer {
     private static final Scanner scanner = new Scanner(System.in);
     private static final MenuManagement menuManagement = new MenuManagement();
 
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    public static final String ANSI_YELLOW = "\u001B[33m";
+
+    public static final String ANSI_GREEN = "\u001B[32m";
+
+    public static final String ANSI_RED = "\u001B[31m";
+
+    public static final String ANSI_CYAN = "\u001B[36m";
+
     public static void main(String[] args) {
 
             menuManagement.loadMenuItems(FILE_NAME);
 
         boolean exit = false;
         while (!exit) {
-            System.out.println("--------Menu Management--------");
-            System.out.println("1. Add Menu Item");
+            System.out.println(ANSI_YELLOW + "--------Menu Management--------" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "1. Add Menu Item");
             System.out.println("2. Remove Menu Item");
             System.out.println("3. Edit Menu Item");
             System.out.println("4. View All Menu Items");
             System.out.println("5. Save Menu Items");
             System.out.println("6. Load Menu Items");
             System.out.println("0. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.print(ANSI_RESET + "Enter your choice: ");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -61,7 +71,7 @@ public class MenuViewer {
     }
 
     private static void addMenuItem() {
-        System.out.println("--------Add Menu Item--------");
+        System.out.println(ANSI_YELLOW + "--------Add Menu Item--------" + ANSI_RESET);
         System.out.print("Enter the item name: ");
         String itemName = scanner.nextLine();
         System.out.print("Enter the item description: ");
@@ -70,7 +80,7 @@ public class MenuViewer {
         int preparationTime = scanner.nextInt();
         System.out.print("Enter the item price: ");
         int itemPrice = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+        scanner.nextLine();
 
         Map<String, Integer> ingredientsMap = new HashMap<>();
         boolean addIngredients = true;
@@ -80,9 +90,9 @@ public class MenuViewer {
             if (ingredient.equalsIgnoreCase("done")) {
                 addIngredients = false;
             } else {
-                System.out.print("Enter the quantity for ingredient '" + ingredient + "': ");
+                System.out.print("Enter the quantity for the ingredient: ");
                 int quantity = scanner.nextInt();
-                scanner.nextLine(); // Consume the newline character
+                scanner.nextLine();
                 ingredientsMap.put(ingredient, quantity);
             }
         }
@@ -90,11 +100,11 @@ public class MenuViewer {
         MenuItems menuItem = new MenuItems(itemName, itemDescription, preparationTime, itemPrice, ingredientsMap);
         menuManagement.addItems(menuItem);
 
-        System.out.println("Menu item added successfully!");
+        System.out.println(ANSI_CYAN + "Menu item added successfully!"+ ANSI_RESET);
     }
 
     private static void removeMenuItem() {
-        System.out.println("--------Remove Menu Item--------");
+        System.out.println(ANSI_RED + "--------Remove Menu Item--------" + ANSI_RESET);
         System.out.print("Enter the item name to remove: ");
         String itemName = scanner.nextLine();
 
@@ -109,14 +119,14 @@ public class MenuViewer {
 
         if (menuItemToRemove != null) {
             menuManagement.removeItems(menuItemToRemove);
-            System.out.println("Menu item removed successfully!");
+            System.out.println(ANSI_CYAN + "Menu item removed successfully!" + ANSI_RESET);
         } else {
-            System.out.println("Menu item not found.");
+            System.out.println(ANSI_RED + "Menu item not found." + ANSI_RESET);
         }
     }
 
     private static void editMenuItem() {
-        System.out.println("--------Edit Menu Item--------");
+        System.out.println(ANSI_YELLOW + "--------Edit Menu Item--------" + ANSI_RESET);
         System.out.print("Enter the item name to edit: ");
         String itemName = scanner.nextLine();
 
@@ -138,7 +148,7 @@ public class MenuViewer {
             int newPrepTime = scanner.nextInt();
             System.out.print("Enter the new item price: ");
             int newPrice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline character
+            scanner.nextLine();
 
             Map<String, Integer> newIngredientsMap = new HashMap<>();
             boolean addIngredients = true;
@@ -148,35 +158,35 @@ public class MenuViewer {
                 if (ingredient.equalsIgnoreCase("done")) {
                     addIngredients = false;
                 } else {
-                    System.out.print("Enter the new quantity for ingredient '" + ingredient + "': ");
+                    System.out.print("Enter the new quantity for the ingredient: ");
                     int quantity = scanner.nextInt();
-                    scanner.nextLine(); // Consume the newline character
+                    scanner.nextLine();
                     newIngredientsMap.put(ingredient, quantity);
                 }
             }
 
             menuManagement.editItems(menuItemToEdit, newName, newDescription, newPrepTime, newPrice, newIngredientsMap);
-            System.out.println("Menu item edited successfully!");
+            System.out.println(ANSI_CYAN + "Menu item edited successfully!" + ANSI_RESET);
         } else {
-            System.out.println("Menu item not found.");
+            System.out.println(ANSI_RED +"Menu item not found." + ANSI_RESET);
         }
     }
 
     private static void viewAllMenuItems() {
-        System.out.println("--------All Menu Items--------");
+        System.out.println(ANSI_YELLOW + "--------All Menu Items--------" + ANSI_RESET);
         List<MenuItems> menuItems = menuManagement.getMenuItems();
         if (menuItems.isEmpty()) {
-            System.out.println("No menu items found.");
+            System.out.println(ANSI_RED + "No menu items found." + ANSI_RESET);
         } else {
             for (MenuItems menuItem : menuItems) {
-                System.out.println("Name: " + menuItem.getItemName());
-                System.out.println("Description: " + menuItem.getItemDescription());
-                System.out.println("Prep Time: " + menuItem.getPreparationTime() + " minutes");
-                System.out.println("Price: $" + menuItem.getItemPrice());
-                System.out.println("Ingredients:");
+                System.out.println(ANSI_GREEN + "Name: " + ANSI_RESET + menuItem.getItemName());
+                System.out.println(ANSI_GREEN + "Description: " + ANSI_RESET + menuItem.getItemDescription());
+                System.out.println(ANSI_GREEN + "Prep Time: " + ANSI_RESET + menuItem.getPreparationTime() + " minutes");
+                System.out.println(ANSI_GREEN + "Price: " + ANSI_RESET + "$" + menuItem.getItemPrice());
+                System.out.println(ANSI_GREEN + "Ingredients:" + ANSI_RESET);
                 Map<String, Integer> ingredientsMap = menuItem.getIngredientsMap();
                 for (Map.Entry<String, Integer> entry : ingredientsMap.entrySet()) {
-                    System.out.println(entry.getKey() + ": " + entry.getValue());
+                    System.out.println(entry.getKey() + ": " + ANSI_GREEN + entry.getValue() + ANSI_RESET);
                 }
                 System.out.println();
             }
@@ -185,12 +195,12 @@ public class MenuViewer {
 
     private static void saveMenuItems() {
         menuManagement.saveMenuItems(FILE_NAME);
-        System.out.println("Menu items saved successfully!");
+        System.out.println(ANSI_CYAN + "Menu items saved successfully!" + ANSI_RESET);
     }
 
     private static void loadMenuItems() {
         menuManagement.loadMenuItems(FILE_NAME);
-        System.out.println("Menu items loaded successfully!");
+        System.out.println(ANSI_CYAN + "Menu items loaded successfully!" + ANSI_RESET);
     }
 }
 

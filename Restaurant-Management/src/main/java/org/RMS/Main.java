@@ -30,6 +30,7 @@ public class Main {
             }
         } else {
             System.out.println("Invalid username or password!");
+            java.awt.Toolkit.getDefaultToolkit().beep();
         }
     }
 

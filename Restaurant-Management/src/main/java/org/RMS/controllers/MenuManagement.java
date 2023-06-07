@@ -42,9 +42,9 @@ public class MenuManagement {
             menuItems = (List<MenuItems>) in.readObject();
             in.close();
             fileIn.close();
-            System.out.println("Menu Items loaded!");
+            System.out.println(ANSI_CYAN + "Menu Items loaded!" + ANSI_RESET);
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Could not load menu items: " + e.getMessage());
+            System.out.println(ANSI_RED + "Could not load menu items: " + e.getMessage() + ANSI_RESET);
         }
     }
 
@@ -55,63 +55,22 @@ public class MenuManagement {
             out.writeObject(menuItems);
             out.close();
             fileOut.close();
-            System.out.println("Menu Items Saved!");
+            System.out.println(ANSI_CYAN + "Menu Items Saved!" + ANSI_RESET);
         } catch (IOException e) {
-            System.out.println("Could not save menu items: " + e.getMessage());
+            System.out.println(ANSI_RED + "Could not save menu items: " + e.getMessage() + ANSI_RESET);
         }
     }
 
     // END IO
 
-    public static void main(String[] args) {
-        MenuManagement menuManagement = new MenuManagement();
-        menuManagement.loadMenuItems("menuItems.txt");
-        InventoryManagement inventoryManagement = new InventoryManagement();
+    public static final String ANSI_RESET = "\u001B[0m";
 
-        // Add ingredients to the inventory
-        inventoryManagement.addIngredient("Cheese", 100);
-        inventoryManagement.addIngredient("Flour", 200);
-        inventoryManagement.addIngredient("Pepperoni", 50);
+    public static final String ANSI_YELLOW = "\u001B[33m";
 
-        // Create a map of ingredients and their quantities
-        Map<String, Integer> ingredientsMap = new HashMap<>();
-        ingredientsMap.put("Cheese", 5);
-        ingredientsMap.put("Flour", 1);
-        ingredientsMap.put("Pepperoni", 20);
+    public static final String ANSI_GREEN = "\u001B[32m";
 
-        // Create a menu item with the ingredients and their quantities
-        MenuItems item1 = new MenuItems("Pepperoni Pizza", "Delicious pepperoni pizza", 10, 15, ingredientsMap);
-        menuManagement.addItems(item1);
+    public static final String ANSI_RED = "\u001B[31m";
 
-        // Edit the menu item
-        String newName = "New Pizza";
-        String newDescription = "Updated pizza description";
-        int newPrepTime = 12;
-        int newPrice = 18;
-        Map<String, Integer> newIngredientsMap = new HashMap<>();
-        newIngredientsMap.put("Cheese", 3);
-        newIngredientsMap.put("Flour", 2);
-        newIngredientsMap.put("Pepperoni", 15);
-        menuManagement.editItems(item1, newName, newDescription, newPrepTime, newPrice, newIngredientsMap);
+    public static final String ANSI_CYAN = "\u001B[32m\u001B[36m";
 
-        // Print the updated menu item
-        List<MenuItems> menuItems = menuManagement.getMenuItems();
-        for (MenuItems menuItem : menuItems) {
-            System.out.println("Name: " + menuItem.getItemName());
-            System.out.println("Description: " + menuItem.getItemDescription());
-            System.out.println("Prep: " + menuItem.getPreparationTime());
-            System.out.println("Price: " + menuItem.getItemPrice());
-            System.out.println("Ingredients List:");
-            Map<String, Integer> menuItemIngredientsMap = menuItem.getIngredientsMap();
-            for (Map.Entry<String, Integer> entry : menuItemIngredientsMap.entrySet()) {
-                String ingredient = entry.getKey();
-                int quantity = entry.getValue();
-                System.out.println("- " + ingredient + " (Quantity: " + quantity + ")");
-            }
-            System.out.println();
-        }
-
-        // Save the updated menu items
-        menuManagement.saveMenuItems("menuItems.txt");
-    }
-}
+  }
