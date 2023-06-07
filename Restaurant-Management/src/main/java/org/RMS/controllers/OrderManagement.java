@@ -43,25 +43,28 @@ public class OrderManagement {
 
         while (true) {
             System.out.println("Select an option:");
-            System.out.println("1. Add to order");
-            System.out.println("2. Update order status");
-            System.out.println("3. View order details");
-            System.out.println("4. Exit");
+            System.out.println("1. Create an order");
+            System.out.println("2. Add to existing order");
+            System.out.println("3. Update order status");
+            System.out.println("4. View order details");
+            System.out.println("0. Exit");
 
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character due to INT*
 
             switch (choice) {
                 case 1:
-                    addToOrder();
                     break;
                 case 2:
-                    updateOrderStatus();
+                    addToOrder();
                     break;
                 case 3:
-                    viewOrderDetails();
+                    updateOrderStatus();
                     break;
                 case 4:
+                    viewOrderDetails();
+                    break;
+                case 0:
                     System.out.println("Exiting order processing...");
                     return; // Exit the method
                 default:
@@ -70,6 +73,13 @@ public class OrderManagement {
             }
         }
     }
+
+    private void createOrder() {
+//        OrderManagement orderManagement = new OrderManagement();
+
+
+    }
+
 
     private void addToOrder() {
         System.out.println("Enter the order ID:");
@@ -160,10 +170,24 @@ public class OrderManagement {
     public static void main(String[] args) {
         OrderManagement orderManagement = new OrderManagement();
 
+        // Handle order processing
+        orderManagement.handleOrderProcessing();
+
+
+//        orderOne();
+    }
+
+
+    public static void orderOne() {
+        OrderManagement firstOrder = new OrderManagement();
+
         // Create a menu item
         MenuItems item1 = new MenuItems("Pepperoni Pizza", "Delicious pepperoni pizza", 10, 15, new HashMap<>());
+        MenuItems item2 = new MenuItems("Cheeseburger", "just a plain ol' burger", 10, 15, new HashMap<>());
+
         List<MenuItems> itemsOrdered = new ArrayList<>();
         itemsOrdered.add(item1);
+        itemsOrdered.add(item2);
 
         // Create an order
         int orderId = 1;
@@ -172,20 +196,17 @@ public class OrderManagement {
         Order order = new Order(orderId, itemsOrdered, totalPrice, status);
 
         // Add the order to the order management
-        orderManagement.addOrder(order);
+        firstOrder.addOrder(order);
 
         // Update the order status
-        orderManagement.updateOrderStatus(orderId, "Preparing");
+        firstOrder.updateOrderStatus(orderId, "Preparing");
 
         // Retrieve the order information
-        Order retrievedOrder = orderManagement.getOrderById(orderId);
+        Order retrievedOrder = firstOrder.getOrderById(orderId);
         System.out.println("Order ID: " + retrievedOrder.getOrderId());
         System.out.println("Items Ordered: " + retrievedOrder.getItemsOrdered());
         System.out.println("Total Price: " + retrievedOrder.getTotalPrice());
         System.out.println("Status: " + retrievedOrder.getStatus());
-
-        // Handle order processing
-        orderManagement.handleOrderProcessing();
     }
 }
 
@@ -194,121 +215,7 @@ public class OrderManagement {
 
 
 
-/*
-package org.RMS.controllers;
-
-import org.RMS.models.MenuItems;
-import org.RMS.models.Order;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-public class OrderManagement {
-    private List<Order> orders;
-    private Scanner scanner;
-
-    public static void main(String[] args) {
-        OrderManagement orderManagement = new OrderManagement();
-        orderManagement.runOrderManagement();
-
-    }
-
-    public OrderManagement() {
-        orders = new ArrayList<>();
-        scanner = new Scanner(System.in);
-
-
-    }
-
-    public void runOrderManagement() {
-        boolean running = true;
-       Scanner scanner = new Scanner(System.in);
-        MenuManagement menuManagement = new MenuManagement();
-        menuManagement.loadMenuItems("menuItems.txt");
-
-        while (running) {
-            System.out.println("1. Add Menu Item to Order");
-            System.out.println("2. Update Order Status");
-            System.out.println("3. Exit");
-            System.out.println("4. Print out orders");
-            System.out.print("Enter your choice: ");
-            int choice = scanner.nextInt();
-            //int choice = Integer.parseInt(scanner.nextLine());
-
-            switch (choice) {
-                case 1:
-                    selectMenuItem(menuManagement.getMenuItems());
 
 
 
 
-                    addMenuItemsToOrder();
-                    break;
-                case 2:
-                    //updateOrderStatus();
-                    break;
-                case 3:
-                    running = false;
-                    break;
-                case 4:
-                    readAllOrders();
-                    break;
-
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-            }
-        }
-    }
-
-    public void addMenuItemsToOrder(int orderId, MenuItems menuItem) {
-        Order order = getOrderById(orderId);
-        if (order != null) {
-            List<MenuItems> itemsOrdered = order.getItemsOrdered();
-            itemsOrdered.add(menuItem);
-        }
-    }
-
-    public void updateOrderStatus(int orderId, int newStatus) {
-        Order order = getOrderById(orderId);
-        if (order != null) {
-            order.setStatus(newStatus);
-        }
-    }
-
-    public void createOrder(int orderId, List<MenuItems> itemsOrdered, int totalPrice, int status) {
-        Order order = new Order(orderId, itemsOrdered, totalPrice, status);
-        orders.add(order);
-    }
-
-    public Order getOrderById(int orderId) {
-        for (Order order : orders) {
-            if (order.getOrderId() == orderId) {
-                return order;
-            }
-        }
-        return null;
-    }
-
-    public void readAllOrders() {
-        if (orders.isEmpty()) {
-            System.out.println("No orders available.");
-            return;
-        }
-
-        System.out.println("All Orders:");
-        for (Order order : orders) {
-            System.out.println("Order ID: " + order.getOrderId());
-            System.out.println("Items Ordered: ");
-            for (MenuItems item : order.getItemsOrdered()) {
-                System.out.println("- " + item.getItemName());
-            }
-            System.out.println("Total Price: $" + order.getTotalPrice());
-            System.out.println("Status: " + order.getStatus());
-            System.out.println("-------------------");
-        }
-    }
-
-
-}
-*/
