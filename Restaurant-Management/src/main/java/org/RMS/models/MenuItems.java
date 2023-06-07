@@ -1,6 +1,5 @@
 package org.RMS.models;
 import org.RMS.controllers.InventoryManagement;
-
 import java.io.Serializable;
 import java.util.Map;
 public class MenuItems implements Serializable {
