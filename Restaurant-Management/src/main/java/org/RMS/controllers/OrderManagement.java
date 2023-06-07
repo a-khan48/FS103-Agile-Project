@@ -54,6 +54,7 @@ public class OrderManagement {
 
             switch (choice) {
                 case 1:
+                    createOrder();
                     break;
                 case 2:
                     addToOrder();
@@ -75,9 +76,19 @@ public class OrderManagement {
     }
 
     private void createOrder() {
-//        OrderManagement orderManagement = new OrderManagement();
+        // Generate the order ID based on the size of the map
+        int orderId = orders.size() + 1;
 
+        // Create an order object
+        List<MenuItems> itemsOrdered = new ArrayList<>();
+        double totalPrice = 0.0;
+        String status = "Waiting";
+        Order order = new Order(orderId, itemsOrdered, totalPrice, status);
 
+        // Add the order to the map
+        orders.put(order.getOrderId(), order);
+
+        System.out.println("Order created successfully. Order ID: " + orderId);
     }
 
 
