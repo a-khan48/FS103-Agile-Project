@@ -66,8 +66,10 @@ public class Main {
                     tables.menu();
                     break;
                 case 4:
-                    // Inventory Tracker?
-                    //
+                    // Inventory Tracker
+                    InventoryManagement inventoryManagement = new InventoryManagement();
+                    String[] inv = {};
+                    Ingredients.main(inv);
                     break;
                 case 5:
                     if (isManager) {
