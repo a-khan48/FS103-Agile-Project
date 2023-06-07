@@ -201,6 +201,7 @@ public class OrderManagement {
         Order order = getOrderById(orderId);
         if (order != null) {
             System.out.println("Order ID: " + order.getOrderId());
+            System.out.println("Table ID: " + order.getTableID());
             System.out.println("Items Ordered: " + order.getItemsOrdered());
             System.out.println("Total Price: " + order.getTotalPrice());
             System.out.println("Status: " + order.getStatus());
