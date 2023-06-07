@@ -68,8 +68,20 @@ public class Main {
                 case 4:
                     // Inventory Tracker
                     InventoryManagement inventoryManagement = new InventoryManagement();
-                    String[] inv = {};
-                    Ingredients.main(inv);
+                    // Add some ingredients to the inventory
+                    inventoryManagement.addIngredient("Pizza Dough", 300);
+                    inventoryManagement.addIngredient("Tomato Sauce", 300);
+                    inventoryManagement.addIngredient("Cheese", 500);
+                    inventoryManagement.addIngredient("Pepperoni", 600);
+                    inventoryManagement.addIngredient("Italian Sausage Pieces", 500);
+                    inventoryManagement.addIngredient("Ham Pieces", 500);
+                    inventoryManagement.addIngredient("Seasoned Beef", 500);
+                    inventoryManagement.addIngredient("Roasted Red Peppers", 200);
+                    inventoryManagement.addIngredient("Onions", 200);
+                    inventoryManagement.addIngredient("Mushrooms", 400);
+                    inventoryManagement.addIngredient("Tomato Slices", 450);
+                    inventoryManagement.addIngredient("Pineapple Chucks", 200);
+                    inventoryManagement.displayOptions();
                     break;
                 case 5:
                     if (isManager) {
