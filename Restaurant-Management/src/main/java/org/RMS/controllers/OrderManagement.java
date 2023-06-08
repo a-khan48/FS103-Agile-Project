@@ -451,7 +451,26 @@ public class OrderManagement {
     }
 
 
+    public int getTableWithMostOrders() {
+        Map<Integer, Integer> tableOrderCounts = new HashMap<>();
+        for (Order order : orders.values()) {
+            int tableID = order.getTableID();
+            tableOrderCounts.put(tableID, tableOrderCounts.getOrDefault(tableID, 0) + 1);
+        }
 
+        int maxOrders = 0;
+        int tableWithMostOrders = -1;
+        for (Map.Entry<Integer, Integer> entry : tableOrderCounts.entrySet()) {
+            int tableID = entry.getKey();
+            int orderCount = entry.getValue();
+            if (orderCount > maxOrders) {
+                maxOrders = orderCount;
+                tableWithMostOrders = tableID;
+            }
+        }
+
+        return tableWithMostOrders;
+    }
 
 
 }

@@ -35,13 +35,13 @@ public class SalesReportManagement {
                 case 2:
                     // Find the most popular item
                     System.out.println("Finding the most popular item...");
-                    int tableWithMostOrders = orderManagement.rankMostOrderedItems();
+                    int tableWithMostItems = orderManagement.rankMostOrderedItems();
                     return; // Exit the method
                 case 3:
                     // Find the table with the most orders
                     System.out.println("Finding the table with the most orders...");
-
-                    // Method()
+                    int tableWithMostOrders = orderManagement.getTableWithMostOrders();
+                    System.out.println("Table with the most orders: " + tableWithMostOrders);
                     return; // Exit the method
                 case 4:
                     // Delete me before submission  String filePath = "C:\\Users\\me\\Downloads\\deleteme1\\FS103-Agile-Project-anotherdeletion\\Restaurant-Management\\src\\test.txt";
