@@ -3,11 +3,7 @@ package org.RMS.controllers;
 import org.RMS.models.MenuItems;
 import org.RMS.models.Order;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +32,37 @@ public class OrderManagement {
         return orders.get(orderId);
     }
 
+    public void rankMostOrderedItems() {
+        Map<MenuItems, Integer> itemFrequency = new HashMap<>();
+
+        for (Order order : orders.values()) {
+            for (MenuItems item : order.getItemsOrdered()) {
+                itemFrequency.put(item, itemFrequency.getOrDefault(item, 0) + 1);
+            }
+        }
+
+        // Sort the menu items based on their frequency in descending order
+        List<Map.Entry<MenuItems, Integer>> sortedItems = new ArrayList<>(itemFrequency.entrySet());
+        sortedItems.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        // Display the top three most ordered items
+        System.out.println("Top 3 Most Ordered Items:");
+
+        int count = 0;
+        for (Map.Entry<MenuItems, Integer> entry : sortedItems) {
+            MenuItems item = entry.getKey();
+            int frequency = entry.getValue();
+
+            System.out.println((count + 1) + ". " + item.getItemName() + " - Quantity: " + frequency);
+
+            count++;
+            if (count >= 3) {
+                break;
+            }
+        }
+    }
+
+
     public void handleOrderProcessing() {
         int choice;
         MenuManagement menuManagement = new MenuManagement();
@@ -47,6 +74,7 @@ public class OrderManagement {
             System.out.println("2. Add to existing order");
             System.out.println("3. Update order status");
             System.out.println("4. View order details");
+            System.out.println("5. Most Popular Items");
             System.out.println("0. Exit");
 
             choice = scanner.nextInt();
@@ -64,6 +92,9 @@ public class OrderManagement {
                     break;
                 case 4:
                     viewOrderDetails();
+                    break;
+                case 5:
+                    rankMostOrderedItems();
                     break;
                 case 0:
                     System.out.println("Exiting order processing...");
