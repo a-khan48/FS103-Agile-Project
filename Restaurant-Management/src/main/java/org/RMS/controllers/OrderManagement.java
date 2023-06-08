@@ -419,7 +419,7 @@ public class OrderManagement {
 
     }
 
-    public void rankMostOrderedItems() {
+    public int rankMostOrderedItems() {
         Map<MenuItems, Integer> itemFrequency = new HashMap<>();
 
         for (Order order : orders.values()) {
@@ -447,6 +447,7 @@ public class OrderManagement {
                 break;
             }
         }
+        return count;
     }
 
 
