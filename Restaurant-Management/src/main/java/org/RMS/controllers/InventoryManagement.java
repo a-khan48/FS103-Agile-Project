@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InventoryManagement {
-   private final Scanner scanner;
+    private final Scanner scanner;
     private List<Ingredients> inventory;
 
     public InventoryManagement() {
@@ -22,8 +22,8 @@ public class InventoryManagement {
         for (Ingredients ingredient : inventory) {
             if (ingredient.getName().equals(name)) {
                 int currentQuantity = ingredient.getCount();
-                    ingredient.count += quantity;
-                    System.out.println(quantity + " " + name + "(s) added to the inventory.");
+                ingredient.count += quantity;
+                System.out.println(quantity + " " + name + "(s) added to the inventory.");
                 return; // Exit the method after processing the ingredient
             }
         }
@@ -48,17 +48,12 @@ public class InventoryManagement {
 
     public void checkIngredientQuantity() {
         for (Ingredients ingredient : inventory) {
-           // if (ingredient.getName().equals(name)) {
-                int quantity = ingredient.getCount();
-
-                System.out.println("Quantity of " + ingredient.getName() + " in the inventory: " + quantity);
-               // return; // Exit the method after processing the ingredient
-           // }
+            int quantity = ingredient.getCount();
+            System.out.println("Quantity of " + ingredient.getName() + " in the inventory: " + quantity);
         }
-        //System.out.println("Ingredient " + name + " is not available in the inventory.");
     }
 
-    public void alertLowIngredients() {
+    public String alertLowIngredients() {
         System.out.println("Low Inventory Alert:");
         boolean isLowInventory = false; // Flag to track if any ingredient is running low
 
@@ -72,7 +67,9 @@ public class InventoryManagement {
         if (!isLowInventory) {
             System.out.println("Inventory is in good standing. No ingredients are running low.");
         }
+        return null;
     }
+
     public void displayOptions() {
         while (true) {
             System.out.println("Choose an option:");
@@ -108,8 +105,8 @@ public class InventoryManagement {
                     removeIngredient(removeName, removeQuantity);
                     break;
                 case 4:
-                   // System.out.print("Enter ingredient name: ");
-                   // String checkName = scanner.nextLine();
+                    // System.out.print("Enter ingredient name: ");
+                    // String checkName = scanner.nextLine();
                     checkIngredientQuantity();
                     alertLowIngredients();
                     break;
@@ -121,13 +118,9 @@ public class InventoryManagement {
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
-
-
-
-        /*System.out.println();
-        displayOptions(); // Recursively call the method to display options again*/
         }
     }
+
     public void generateIngredients() {
         addIngredient("Pizza Dough", 300);
         addIngredient("Tomato Sauce", 300);
@@ -142,4 +135,14 @@ public class InventoryManagement {
         addIngredient("Tomato Slices", 450);
         addIngredient("Pineapple Chucks", 200);
     }
+
+    public int getIngredientCount(String name) {
+        for (Ingredients ingredient : inventory) {
+            if (ingredient.getName().equals(name)) {
+                return ingredient.getCount();
+            }
+        }
+        return 0; // Ingredient not found, return 0 as default count
+    }
+
 }
