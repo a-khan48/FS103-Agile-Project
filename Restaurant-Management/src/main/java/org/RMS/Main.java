@@ -58,7 +58,7 @@ public class Main {
                     menuViewer.main(args);
                     break;
                 case 2:
-//                    OrderManagement orderManagement = new OrderManagement();
+                    orderManagement.addOrdersToTables();
                     orderManagement.handleOrderProcessing();
                     break;
                 case 3:

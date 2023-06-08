@@ -3,6 +3,7 @@ package org.RMS.controllers;
 import org.RMS.models.MenuItems;
 import org.RMS.models.Order;
 
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -38,15 +39,16 @@ public class OrderManagement {
 
     public void handleOrderProcessing() {
         int choice;
-        MenuManagement menuManagement = new MenuManagement();
-        menuManagement.loadMenuItems("menuItems.txt"); // added code to instantiate the menu list.
+//        MenuManagement menuManagement = new MenuManagement();
+//        menuManagement.loadMenuItems("menuItems.txt"); // added code to instantiate the menu list.
 
         while (true) {
             System.out.println("Select an option:");
             System.out.println("1. Create an order");
             System.out.println("2. Add to existing order");
             System.out.println("3. Update order status");
-            System.out.println("4. View order details");
+            System.out.println("4. View order-specific details");
+            System.out.println("5. View all orders");
             System.out.println("0. Exit");
 
             choice = scanner.nextInt();
@@ -64,6 +66,9 @@ public class OrderManagement {
                     break;
                 case 4:
                     viewOrderDetails();
+                    break;
+                case 5:
+                    printAllOrders();
                     break;
                 case 0:
                     System.out.println("Exiting order processing...");
@@ -193,7 +198,7 @@ public class OrderManagement {
         }
     }
 
-    private void viewOrderDetails() {
+    /*private void viewOrderDetails() {
         System.out.println("Enter the order ID:");
         int orderId = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character due to INT*
@@ -208,16 +213,61 @@ public class OrderManagement {
         } else {
             System.out.println("Order not found.");
         }
+    }*/
+
+//    private void viewOrderDetails() {
+//        System.out.println("Enter the order ID:");
+//        int orderId = scanner.nextInt();
+//        scanner.nextLine(); // Consume the newline character due to INT*
+//
+//        Order order = getOrderById(orderId);
+//        if (order != null) {
+//            System.out.println("Order ID: " + order.getOrderId());
+//            System.out.println("Table ID: " + order.getTableID());
+//
+//            System.out.println("Items Ordered:");
+//            for (MenuItems menuItem : order.getItemsOrdered()) {
+//                int quantity = Collections.frequency(order.getItemsOrdered(), menuItem);
+//                System.out.println("- " + menuItem.getItemName() + " (Quantity: " + quantity + ")");
+//            }
+//
+//            System.out.println("Total Price: " + order.getTotalPrice());
+//        } else {
+//            System.out.println("Order not found.");
+//        }
+//    }
+
+    private void viewOrderDetails() {
+        System.out.println("Enter the order ID:");
+        int orderId = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character due to INT*
+
+        Order order = getOrderById(orderId);
+        if (order != null) {
+            System.out.println("Order ID: " + order.getOrderId());
+            System.out.println("Table ID: " + order.getTableID());
+
+            System.out.println("Items Ordered:");
+            for (MenuItems menuItem : order.getItemsOrdered()) {
+                int quantity = Collections.frequency(order.getItemsOrdered(), menuItem);
+                System.out.println("- " + menuItem.getItemName() + " (Quantity: " + quantity + ")");
+            }
+
+            System.out.println("Total Price: " + order.getTotalPrice());
+        } else {
+            //System.out.println("Order not found.");
+        }
     }
 
     public static void main(String[] args) {
         OrderManagement orderManagement = new OrderManagement();
-
+        orderManagement.addOrdersToTables();
         // Handle order processing
         orderManagement.handleOrderProcessing();
 
 
-//        orderOne();
+
+
     }
 
 
@@ -259,6 +309,60 @@ public class OrderManagement {
         }
         return totalRevenue;
     }
+
+    public void printAllOrders() {
+        for (Map.Entry<Integer, Order> entry : orders.entrySet()) {
+            int orderId = entry.getKey();
+            Order order = entry.getValue();
+
+            System.out.println("Order ID: " + orderId);
+            System.out.println("Table ID: " + order.getTableID());
+            System.out.println("Items Ordered: " + order.getItemsOrdered());
+            System.out.println("Total Price: " + order.getTotalPrice());
+            System.out.println("Status: " + order.getStatus());
+            System.out.println("------------------------------------");
+        }
+    }
+
+    public void addOrdersToTables() {
+        MenuManagement menuManagement = new MenuManagement();
+        menuManagement.loadMenuItems("menuItems.txt");
+
+        int tableCount = 6;
+
+        for (int orderId = 1; orderId <= 7; orderId++) {
+
+            int tableNumber = (int) (Math.random() * tableCount) + 1;
+
+
+            List<MenuItems> itemsOrdered = new ArrayList<>();
+            int itemCount = (int) (Math.random() * 4) + 1;
+
+            for (int i = 0; i < itemCount; i++) {
+                List<MenuItems> menuItems = menuManagement.getMenuItems();
+                int randomItemIndex = (int) (Math.random() * menuItems.size());
+                MenuItems selectedMenuItem = menuItems.get(randomItemIndex);
+                itemsOrdered.add(selectedMenuItem);
+            }
+
+
+            double totalPrice = 0.0;
+            for (MenuItems item : itemsOrdered) {
+                totalPrice += item.getItemPrice();
+            }
+
+            String status = "Waiting";
+
+            Order order = new Order(orderId, itemsOrdered, totalPrice, status);
+            order.setTableID(tableNumber);
+
+            orders.put(orderId, order);
+        }
+
+    }
+
+
+
 
 
 }
