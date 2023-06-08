@@ -3,12 +3,7 @@ package org.RMS.controllers;
 import org.RMS.models.MenuItems;
 import org.RMS.models.Order;
 
-import java.util.Collections;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +63,7 @@ public class OrderManagement {
                     viewOrderDetails();
                     break;
                 case 5:
-                    printAllOrders();
+                    printAllOrderDetails();
                     break;
                 case 0:
                     System.out.println("Exiting order processing...");
@@ -237,7 +232,7 @@ public class OrderManagement {
 //        }
 //    }
 
-    private void viewOrderDetails() {
+    /*private void viewOrderDetails() {
         System.out.println("Enter the order ID:");
         int orderId = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character due to INT*
@@ -257,7 +252,52 @@ public class OrderManagement {
         } else {
             //System.out.println("Order not found.");
         }
+    }*/
+
+    private void viewOrderDetails() {
+        System.out.println("Enter the order ID:");
+        int orderId = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character due to INT*
+
+        Order order = getOrderById(orderId);
+        if (order != null) {
+            System.out.println("Order ID: " + order.getOrderId());
+            System.out.println("Table ID: " + order.getTableID());
+
+
+            List<String> orderedItems = new ArrayList<>();
+            double orderSubtotal = 0.0; // Variable to store the order subtotal
+
+            for (MenuItems menuItem : order.getItemsOrdered()) {
+                int quantity = Collections.frequency(order.getItemsOrdered(), menuItem);
+                double itemPrice = menuItem.getItemPrice();
+                double subtotal = itemPrice * quantity; // Calculate the subtotal for each item
+                orderSubtotal += subtotal; // Add the subtotal to the order subtotal
+                String itemString = "- " + menuItem.getItemName() + " (Quantity: " + quantity + ", Price: " + formatDecimal(itemPrice) + ", Subtotal: " + formatDecimal(subtotal) + ")";
+
+                if (!orderedItems.contains(itemString)) {
+                    orderedItems.add(itemString);
+                }
+            }
+
+            System.out.println("Items Ordered:");
+            for (String itemString : orderedItems) {
+                System.out.println(itemString);
+            }
+
+            System.out.println("Order Subtotal: " + formatDecimal(orderSubtotal)); // Print the order subtotal
+            System.out.println("Total Price: " + formatDecimal(order.getTotalPrice()));
+            System.out.println("Order Status: " + order.getStatus());
+        } else {
+            System.out.println("Order not found.");
+        }
     }
+
+    private String formatDecimal(double value) {
+        return String.format("%.2f", value);
+    }
+
+
 
     public static void main(String[] args) {
         OrderManagement orderManagement = new OrderManagement();
@@ -310,16 +350,34 @@ public class OrderManagement {
         return totalRevenue;
     }
 
-    public void printAllOrders() {
-        for (Map.Entry<Integer, Order> entry : orders.entrySet()) {
-            int orderId = entry.getKey();
-            Order order = entry.getValue();
-
-            System.out.println("Order ID: " + orderId);
+    private void printAllOrderDetails() {
+        for (Order order : orders.values()) {
+            System.out.println("Order ID: " + order.getOrderId());
             System.out.println("Table ID: " + order.getTableID());
-            System.out.println("Items Ordered: " + order.getItemsOrdered());
-            System.out.println("Total Price: " + order.getTotalPrice());
-            System.out.println("Status: " + order.getStatus());
+
+            List<String> orderedItems = new ArrayList<>();
+            double orderSubtotal = 0.0; // Variable to store the order subtotal
+
+            for (MenuItems menuItem : order.getItemsOrdered()) {
+                int quantity = Collections.frequency(order.getItemsOrdered(), menuItem);
+                double itemPrice = menuItem.getItemPrice();
+                double subtotal = itemPrice * quantity; // Calculate the subtotal for each item
+                orderSubtotal += subtotal; // Add the subtotal to the order subtotal
+                String itemString = "- " + menuItem.getItemName() + " (Quantity: " + quantity + ", Price: " + formatDecimal(itemPrice) + ", Subtotal: " + formatDecimal(subtotal) + ")";
+
+                if (!orderedItems.contains(itemString)) {
+                    orderedItems.add(itemString);
+                }
+            }
+
+            System.out.println("Items Ordered:");
+            for (String itemString : orderedItems) {
+                System.out.println(itemString);
+            }
+
+            System.out.println("Order Subtotal: " + formatDecimal(orderSubtotal)); // Print the order subtotal
+            System.out.println("Total Price: " + formatDecimal(order.getTotalPrice()));
+            System.out.println("Order Status: " + order.getStatus());
             System.out.println("------------------------------------");
         }
     }
@@ -359,6 +417,36 @@ public class OrderManagement {
             orders.put(orderId, order);
         }
 
+    }
+
+    public void rankMostOrderedItems() {
+        Map<MenuItems, Integer> itemFrequency = new HashMap<>();
+
+        for (Order order : orders.values()) {
+            for (MenuItems item : order.getItemsOrdered()) {
+                itemFrequency.put(item, itemFrequency.getOrDefault(item, 0) + 1);
+            }
+        }
+
+        // Sort the menu items based on their frequency in descending order
+        List<Map.Entry<MenuItems, Integer>> sortedItems = new ArrayList<>(itemFrequency.entrySet());
+        sortedItems.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        // Display the top three most ordered items
+        System.out.println("Top 3 Most Ordered Items:");
+
+        int count = 0;
+        for (Map.Entry<MenuItems, Integer> entry : sortedItems) {
+            MenuItems item = entry.getKey();
+            int frequency = entry.getValue();
+
+            System.out.println((count + 1) + ". " + item.getItemName() + " - Quantity: " + frequency);
+
+            count++;
+            if (count >= 3) {
+                break;
+            }
+        }
     }
 
 
