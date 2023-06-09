@@ -151,4 +151,17 @@ public class InventoryManagement {
     public static final String ANSI_RED = "\u001B[31m";
 
     public static final String ANSI_CYAN = "\u001B[32m\u001B[36m";
+
+    // added method for testing if we use InventoryManagementTest
+    public int getIngredientCount(String name) {
+        for (Ingredients ingredient : inventory) {
+            if (ingredient.getName().equals(name)) {
+                return ingredient.getCount();
+            }
+        }
+        return 0; // Ingredient not found, return 0 as default count
+    }
+
+
+
 }

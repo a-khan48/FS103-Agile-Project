@@ -17,11 +17,11 @@ public class Main {
 
             switch (user.getRole()) {
                 case MANAGER:
-                    System.out.println("Hello Manager!");
+                    System.out.println("Hello " + user.getUsername() + "!");
                     handleActions(true);
                     break;
                 case STAFF:
-                    System.out.println("Hello Staff!");
+                    System.out.println("Hello " + user.getUsername() + "!");
                     handleActions(false);
                     break;
             }
