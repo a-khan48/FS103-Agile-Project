@@ -4,6 +4,7 @@ import org.RMS.Viewers.MenuViewer;
 import org.RMS.controllers.*;
 import org.RMS.models.User;
 import java.util.Scanner;
+import java.io.Console;
 
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
         // User logins first
         UserManagement userManagement = new UserManagement(); // Put this in the main file when it's been created..
         User user = UserManagement.UserManagementMenu();
-
+//        UserManagement.login(user);       ONLY ADD IF ADDING 6 LOGOFF
         if (user != null) {
             System.out.println("Login successful!");
 
@@ -31,7 +32,7 @@ public class Main {
         }
     }
 
-    private static void handleActions(boolean isManager) {
+    public static void handleActions(boolean isManager) {
         Scanner scanner = new Scanner(System.in);
         OrderManagement orderManagement = new OrderManagement();
         SalesReportManagement reportManagement = new SalesReportManagement(orderManagement);
@@ -45,6 +46,7 @@ public class Main {
             if (isManager) {
                 System.out.println("5. Sales Report");
             }
+//            System.out.println("6. Logoff");      ONLY ADD IF WE NEED THIS
             System.out.println("0. Exit");
 
             int choice = scanner.nextInt();
@@ -75,13 +77,17 @@ public class Main {
                     break;
                 case 5:
                     if (isManager) {
-                        // Sales Report
-
                         reportManagement.generateReport();
                     } else {
                         System.out.println("Invalid choice. Please try again.");
                     }
                     break;
+// DISCUSS IF WE NEED LOGOFF?
+//                case 6:
+//                    System.out.println("Logging Off...");
+//                    User user = UserManagement.UserManagementMenu();
+//                    UserManagement.login(user);
+
                 case 0:
                     // Exit
                     return;

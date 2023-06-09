@@ -3,6 +3,8 @@ package org.RMS.controllers;
 import org.RMS.models.MenuItems;
 import org.RMS.models.Order;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.*;
 
 import java.util.HashMap;
@@ -375,7 +377,6 @@ public class OrderManagement {
                 System.out.println(itemString);
             }
 
-            System.out.println("Order Subtotal: " + formatDecimal(orderSubtotal)); // Print the order subtotal
             System.out.println("Total Price: " + formatDecimal(order.getTotalPrice()));
             System.out.println("Order Status: " + order.getStatus());
             System.out.println("------------------------------------");
@@ -448,6 +449,36 @@ public class OrderManagement {
             }
         }
         return count;
+    }
+
+    public void writeMostOrderedItems(BufferedWriter writer) throws IOException { // literally same as rankorderitems but I need it to write into the file, only addition was the write and removing the sout statement
+        Map<MenuItems, Integer> itemFrequency = new HashMap<>();
+
+        for (Order order : orders.values()) {
+            for (MenuItems item : order.getItemsOrdered()) {
+                itemFrequency.put(item, itemFrequency.getOrDefault(item, 0) + 1);
+            }
+        }
+
+        // Sort the menu items based on their frequency in descending order
+        List<Map.Entry<MenuItems, Integer>> sortedItems = new ArrayList<>(itemFrequency.entrySet());
+        sortedItems.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+
+        writer.newLine();
+
+        int count = 0;
+        for (Map.Entry<MenuItems, Integer> entry : sortedItems) {
+            MenuItems item = entry.getKey();
+            int frequency = entry.getValue();
+
+            writer.write((count + 1) + ". " + item.getItemName() + " - Quantity: " + frequency);
+            writer.newLine();
+
+            count++;
+            if (count >= 3) {
+                break;
+            }
+        }
     }
 
 

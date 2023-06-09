@@ -21,6 +21,7 @@ public class SalesReportManagement {
             System.out.println("2. Most Popular Item");
             System.out.println("3. Table With Most Orders");
             System.out.println("4. Export To File");
+            System.out.println("0. Exit");
 
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character due to INT*
@@ -31,22 +32,23 @@ public class SalesReportManagement {
                     double totalRevenue = orderManagement.calculateTotalRevenue();
                     System.out.println("Total Revenue: $" + totalRevenue);
                     // Method()
-                    return; // Exit the method
+                    break; // Exit the method
                 case 2:
                     // Find the most popular item
                     System.out.println("Finding the most popular item...");
                     int tableWithMostItems = orderManagement.rankMostOrderedItems();
-                    return; // Exit the method
+                    break; // Exit the method
                 case 3:
                     // Find the table with the most orders
                     System.out.println("Finding the table with the most orders...");
                     int tableWithMostOrders = orderManagement.getTableWithMostOrders();
                     System.out.println("Table with the most orders: " + tableWithMostOrders);
-                    return; // Exit the method
+                    break; // Exit the method
                 case 4:
                     // Delete me before submission  String filePath = "C:\\Users\\me\\Downloads\\deleteme1\\FS103-Agile-Project-anotherdeletion\\Restaurant-Management\\src\\test.txt";
                     String filePath = "Restaurant-Management/src/main/java/org/RMS/controllers/text.txt";
                     exportSalesReport(filePath);
+                    break;
                 case 0:
                     // Exit
                     return;
@@ -72,20 +74,14 @@ public class SalesReportManagement {
             writer.newLine();
             writer.newLine();
             writer.write("Most Popular Items:");
+//            int tableWithMostItems = orderManagement.rankMostOrderedItems();
+//            writer.write(tableWithMostItems);
+//            writer.write(orderManagement.rankMostOrderedItems());
+            orderManagement.writeMostOrderedItems(writer);
             writer.newLine();
-            // Write the most popular items
-            // writer.write("Item 1");
-            // writer.newLine();
-            // writer.write("Item 2");
-            // writer.newLine();
+            int tableWithMostOrders = orderManagement.getTableWithMostOrders();
+            writer.write("Table with the most orders: " + tableWithMostOrders);
             writer.newLine();
-            writer.write("Table Sales:");
-            writer.newLine();
-            // Write the table sales
-            // writer.write("Table 1");
-            // writer.newLine();
-            // writer.write("Table 2");
-            // writer.newLine();
         } catch (IOException e) {
             System.out.println("Error exporting sales report: " + e.getMessage());
         }

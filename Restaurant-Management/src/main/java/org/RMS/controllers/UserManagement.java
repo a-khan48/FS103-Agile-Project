@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static org.RMS.Main.handleActions;
+
 public class UserManagement {
     private List<User> users;
 
@@ -55,5 +57,26 @@ public class UserManagement {
         // }
         return user;
     }
+
+    // Only add if using number 6
+//    public static void login(User user) {
+//        if (user != null) {
+//            System.out.println("Login successful!");
+//
+//            switch (user.getRole()) {
+//                case MANAGER:
+//                    System.out.println("Hello Manager!");
+//                    handleActions(true);
+//                    break;
+//                case STAFF:
+//                    System.out.println("Hello Staff!");
+//                    handleActions(false);
+//                    break;
+//            }
+//        } else {
+//            System.out.println("Invalid username or password!");
+//            java.awt.Toolkit.getDefaultToolkit().beep();
+//        }
+//    }
 
 }

@@ -1,9 +1,12 @@
 ----------------------------
 Daily Sales Report
-Date: 2023-06-08
+Date: 2023-06-09
 ----------------------------
-Total Revenue: $260.0
+Total Revenue: $220.0
 
 Most Popular Items:
+1. Pepperoni Pizza - Quantity: 5
+2. Cheese Pizza - Quantity: 4
+3. Pineapple Pizza - Quantity: 4
 
-Table Sales:
+Table with the most orders: 6
