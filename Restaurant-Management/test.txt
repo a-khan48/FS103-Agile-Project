@@ -1,0 +1,9 @@
+----------------------------
+Daily Sales Report
+Date: 2023-06-09
+----------------------------
+Total Revenue: $0.0
+
+Most Popular Items:
+
+Table with the most orders: -1

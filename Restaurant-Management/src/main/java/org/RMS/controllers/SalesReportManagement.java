@@ -93,6 +93,12 @@ public class SalesReportManagement {
         }
     }
 
+    public double calculateTotalRevenue() {
+        OrderManagement orderManagement = new OrderManagement();
+        double totalRevenue = orderManagement.calculateTotalRevenue();
+        return 0.0; // Placeholder value, replace with the actual calculated revenue
+    }
+
     public static final String ANSI_RESET = "\u001B[0m";
 
     public static final String ANSI_YELLOW = "\u001B[33m";

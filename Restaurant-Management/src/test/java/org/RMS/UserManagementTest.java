@@ -1,4 +1,4 @@
-package org.controllers;
+package org.RMS;
 import org.RMS.models.User;
 import org.RMS.controllers.UserManagement;
 import org.junit.Before;
