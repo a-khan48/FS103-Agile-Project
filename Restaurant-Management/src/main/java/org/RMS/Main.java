@@ -9,10 +9,9 @@ import java.io.Console;
 
 public class Main {
     public static void main(String[] args) {
-        // User logins first
-        UserManagement userManagement = new UserManagement(); // Put this in the main file when it's been created..
+        UserManagement userManagement = new UserManagement();
         User user = UserManagement.UserManagementMenu();
-//        UserManagement.login(user);       ONLY ADD IF ADDING 6 LOGOFF
+
         if (user != null) {
             System.out.println("Login successful!");
 
@@ -46,7 +45,7 @@ public class Main {
             if (isManager) {
                 System.out.println("5. Sales Report");
             }
-//            System.out.println("6. Logoff");      ONLY ADD IF WE NEED THIS
+
             System.out.println("0. Exit");
 
             int choice = scanner.nextInt();
@@ -60,6 +59,7 @@ public class Main {
                     menuViewer.main(args);
                     break;
                 case 2:
+                    // Order Management
                     orderManagement.addOrdersToTables();
                     orderManagement.handleOrderProcessing();
                     break;
@@ -76,17 +76,13 @@ public class Main {
                     inventoryManagement.displayOptions();
                     break;
                 case 5:
+                    // isManager then display per above if statement previously
                     if (isManager) {
                         reportManagement.generateReport();
                     } else {
                         System.out.println("Invalid choice. Please try again.");
                     }
                     break;
-// DISCUSS IF WE NEED LOGOFF?
-//                case 6:
-//                    System.out.println("Logging Off...");
-//                    User user = UserManagement.UserManagementMenu();
-//                    UserManagement.login(user);
 
                 case 0:
                     // Exit
@@ -98,63 +94,3 @@ public class Main {
         }
     }
 }
-
-
-
-
-
-
-
-//
-//
-//
-//    public static void main(String[] args) {
-//        // User logins first
-//        UserManagement userManagement = new UserManagement(); // Put this in the main file when it's been created..
-//        User user = UserManagement.UserManagementMenu();
-//
-//        if (user != null) {
-//            System.out.println("Login successful!");
-//            if (user.getRole() == User.Role.MANAGER) {
-//                System.out.println("Hello manager!");
-//                // 1. Menu Management (Add, Remove, Edit menu items)
-//                // 2. Enter Order For Customer (Order Processing)
-//                // 3. Reserve Table
-//                // 4. Table Status
-//                // 5. Inventory Tracker
-//                // 6. Sales Report
-//            } else if (user.getRole() == User.Role.STAFF) {
-//                // 1. Menu Management (Add, Remove, Edit menu items)
-//                // 2. Enter Order For Customer (Order Processing)
-//                // 3. Reserve Table
-//                // 4. Table Status
-//                // 5. Inventory Tracker
-//            }
-//        } else {
-//            System.out.println("Invalid username or password!");
-//        }
-//
-
-
-
-
-
-
-// Sher's Sales Report Class
-// ----------------------------
-// Daily Sales Report
-// Date:
-// ----------------------------
-// Total Revenue
-
-// Kevin's Table Sales
-
-// Ahmad's Menu Management
-
-// 1. Menu Management (Add, Remove, Edit menu items)
-// 2. Enter Order For Customer (Order Processing)
-// 3. Reserve Table
-// 4. Table Status
-// 5. Inventory Tracker
-// 6. Sales Report
-

@@ -16,16 +16,9 @@ public class UserManagement {
         users.add(new User("Staff", PasswordHasher.hash("Staff"), User.Role.STAFF));
         users.add(new User("Staff2", PasswordHasher.hash("2"), User.Role.STAFF));
         users.add(new User("Staff3", PasswordHasher.hash("3"), User.Role.STAFF));
-        users.add(new User("Staff4", PasswordHasher.hash("4"), User.Role.STAFF));
-        users.add(new User("Staff5", PasswordHasher.hash("5"), User.Role.STAFF));
-        users.add(new User("Staff6", PasswordHasher.hash("6"), User.Role.STAFF));
         users.add(new User("Manager", PasswordHasher.hash("Manager"), User.Role.MANAGER));
-        users.add(new User("Manager2", PasswordHasher.hash("8"), User.Role.MANAGER));
-        users.add(new User("Manager3", PasswordHasher.hash("9"), User.Role.MANAGER));
-        users.add(new User("Manager4", PasswordHasher.hash("10"), User.Role.MANAGER));
-        users.add(new User("Manager5", PasswordHasher.hash("11"), User.Role.MANAGER));
-        users.add(new User("Manager6", PasswordHasher.hash("12"), User.Role.MANAGER));
-
+        users.add(new User("Manager2", PasswordHasher.hash("2"), User.Role.MANAGER));
+        users.add(new User("Manager3", PasswordHasher.hash("3"), User.Role.MANAGER));
     }
 
     public User login(String username, String password) {
@@ -49,34 +42,20 @@ public class UserManagement {
         String password = scanner.nextLine();
 
         User user = userManagement.login(username, password);
-
-//
-        // THIS IS TO PROVE HASHING WORKS
-        // for (User userlist : userManagement.users) {
-        // System.out.println("Username: " + userlist.getUsername() + ", Hashed Password: " + userlist.getHashedPassword());
-        // }
         return user;
     }
 
-    // Only add if using number 6
-//    public static void login(User user) {
-//        if (user != null) {
-//            System.out.println("Login successful!");
-//
-//            switch (user.getRole()) {
-//                case MANAGER:
-//                    System.out.println("Hello Manager!");
-//                    handleActions(true);
-//                    break;
-//                case STAFF:
-//                    System.out.println("Hello Staff!");
-//                    handleActions(false);
-//                    break;
-//            }
-//        } else {
-//            System.out.println("Invalid username or password!");
-//            java.awt.Toolkit.getDefaultToolkit().beep();
-//        }
-//    }
+    public void listOfUsersAndPasswords() {
+        UserManagement userManagement = new UserManagement();
+         for (User userlist : userManagement.users) {
+         System.out.println("Username: " + userlist.getUsername() + ", Hashed Password: " + userlist.getHashedPassword());
+         }
+    }
+
+    // If you wish to run the hashing to prove it works
+    //    public static void main(String[] args) {
+    //        UserManagement userManagement = new UserManagement();
+    //        userManagement.listOfUsersAndPasswords();
+    //    }
 
 }

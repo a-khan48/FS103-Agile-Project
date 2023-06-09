@@ -31,21 +31,20 @@ public class SalesReportManagement {
                     // Perform total revenue calculation
                     double totalRevenue = orderManagement.calculateTotalRevenue();
                     System.out.println("Total Revenue: $" + totalRevenue);
-                    // Method()
-                    break; // Exit the method
+                    break;
                 case 2:
                     // Find the most popular item
                     System.out.println("Finding the most popular item...");
                     int tableWithMostItems = orderManagement.rankMostOrderedItems();
-                    break; // Exit the method
+                    break;
                 case 3:
                     // Find the table with the most orders
                     System.out.println("Finding the table with the most orders...");
                     int tableWithMostOrders = orderManagement.getTableWithMostOrders();
                     System.out.println("Table with the most orders: " + tableWithMostOrders);
-                    break; // Exit the method
+                    break;
                 case 4:
-                    // Delete me before submission  String filePath = "C:\\Users\\me\\Downloads\\deleteme1\\FS103-Agile-Project-anotherdeletion\\Restaurant-Management\\src\\test.txt";
+                    // Export to a notepad txt file
                     String filePath = "Restaurant-Management/src/main/java/org/RMS/controllers/text.txt";
                     exportSalesReport(filePath);
                     break;
@@ -59,7 +58,7 @@ public class SalesReportManagement {
         }
     }
 
-    public void exportSalesReport(String filePath) {
+    public void exportSalesReport(String filePath) { // This writes the code into a file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write("----------------------------");
             writer.newLine();
@@ -74,9 +73,6 @@ public class SalesReportManagement {
             writer.newLine();
             writer.newLine();
             writer.write("Most Popular Items:");
-//            int tableWithMostItems = orderManagement.rankMostOrderedItems();
-//            writer.write(tableWithMostItems);
-//            writer.write(orderManagement.rankMostOrderedItems());
             orderManagement.writeMostOrderedItems(writer);
             writer.newLine();
             int tableWithMostOrders = orderManagement.getTableWithMostOrders();
@@ -96,6 +92,4 @@ public class SalesReportManagement {
             System.out.println("Error reading sales report: " + e.getMessage());
         }
     }
-
-
 }
