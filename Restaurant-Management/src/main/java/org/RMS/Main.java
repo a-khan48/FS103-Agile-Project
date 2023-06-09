@@ -37,13 +37,13 @@ public class Main {
         SalesReportManagement reportManagement = new SalesReportManagement(orderManagement);
 
         while (true) {
-            System.out.println("Select an option:");
-            System.out.println("1. Menu Management (Add, Remove, Edit menu items)");
+            System.out.println(ANSI_YELLOW + "Select an option:" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "1. Menu Management (Add, Remove, Edit menu items)");
             System.out.println("2. Enter Order For Customer (Order Processing)");
             System.out.println("3. Table Options");
-            System.out.println("4. Inventory Tracker");
+            System.out.println("4. Inventory Tracker" + ANSI_RESET);
             if (isManager) {
-                System.out.println("5. Sales Report");
+                System.out.println(ANSI_YELLOW + "5. Sales Report" +ANSI_RESET);
             }
 
             System.out.println("0. Exit");
@@ -80,7 +80,7 @@ public class Main {
                     if (isManager) {
                         reportManagement.generateReport();
                     } else {
-                        System.out.println("Invalid choice. Please try again.");
+                        System.out.println(ANSI_RED + "Invalid choice. Please try again." + ANSI_RESET);
                     }
                     break;
 
@@ -88,9 +88,19 @@ public class Main {
                     // Exit
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(ANSI_RED+ "Invalid choice. Please try again." + ANSI_RESET);
                     break;
             }
         }
     }
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    public static final String ANSI_YELLOW = "\u001B[33m";
+
+    public static final String ANSI_GREEN = "\u001B[32m";
+
+    public static final String ANSI_RED = "\u001B[31m";
+
+    public static final String ANSI_CYAN = "\u001B[32m\u001B[36m";
+
 }

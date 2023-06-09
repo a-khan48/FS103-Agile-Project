@@ -22,10 +22,10 @@ public class TableManagement {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("1. Print table status and size");
+            System.out.println(ANSI_GREEN + "1. Print table status and size");
             System.out.println("2. Assign customer to table");
             System.out.println("3. Reset table status");
-            System.out.println("4. Exit");
+            System.out.println("4. Exit" + ANSI_RESET);
             System.out.print("Enter your choice: ");
             int choice = scanner.nextInt();
 
@@ -44,10 +44,10 @@ public class TableManagement {
                     resetTableStatus(resetTableID);
                     break;
                 case 4:
-                    System.out.println("Exiting...");
+                    System.out.println(ANSI_CYAN + "Exiting..." + ANSI_RESET);
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(ANSI_RED + "Invalid choice. Please try again." + ANSI_RESET);
             }
 
             System.out.println();
@@ -79,25 +79,25 @@ public class TableManagement {
             if (table.getTableID() == tableID) {
                 if (table.getStatus() == 1) {
                     table.setStatus(2); // set status to 2 after finding it is open
-                    System.out.println("Customer assigned to Table " + tableID);
+                    System.out.println(ANSI_CYAN + "Customer assigned to Table " + tableID + ANSI_RESET);
                 } else {
-                    System.out.println("Table " + tableID + " is currently unavailable.");
+                    System.out.println(ANSI_RED + "Table " + tableID + " is currently unavailable." + ANSI_RESET);
                 }
                 return;
             }
         }
-        System.out.println("Table " + tableID + " not found.");
+        System.out.println(ANSI_RED + "Table " + tableID + " not found." + ANSI_RESET);
     }
 
     public void resetTableStatus(int tableID) {
         for (Table table : tables) {  // loop through tables to find table with correct ID
             if (table.getTableID() == tableID) {
                 table.setStatus(1); // set status to 1 (available)
-                System.out.println("Table " + tableID + " status has been reset to available.");
+                System.out.println(ANSI_CYAN+ "Table " + tableID + " status has been reset to available." + ANSI_RESET);
                 return;
             }
         }
-        System.out.println("Table " + tableID + " not found.");
+        System.out.println(ANSI_RED + "Table " + tableID + " not found." + ANSI_RESET);
     }
 
     public String getTableStatus(int tableID) {
@@ -124,4 +124,14 @@ public class TableManagement {
             System.out.println("Table " + tableID + ", Size: " + tableSize + ", Status: " + statusMsg);
         }
     }
+
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    public static final String ANSI_YELLOW = "\u001B[33m";
+
+    public static final String ANSI_GREEN = "\u001B[32m";
+
+    public static final String ANSI_RED = "\u001B[31m";
+
+    public static final String ANSI_CYAN = "\u001B[32m\u001B[36m";
 }

@@ -40,13 +40,13 @@ public class OrderManagement {
 //        menuManagement.loadMenuItems("menuItems.txt"); // added code to instantiate the menu list.
 
         while (true) {
-            System.out.println("Select an option:");
-            System.out.println("1. Create an order");
+            System.out.println(ANSI_YELLOW + "Select an option:" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "1. Create an order");
             System.out.println("2. Add to existing order");
             System.out.println("3. Update order status");
             System.out.println("4. View order-specific details");
             System.out.println("5. View all orders");
-            System.out.println("0. Exit");
+            System.out.println("0. Exit" + ANSI_RESET);
 
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character due to INT*
@@ -68,17 +68,17 @@ public class OrderManagement {
                     printAllOrderDetails();
                     break;
                 case 0:
-                    System.out.println("Exiting order processing...");
+                    System.out.println(ANSI_CYAN + "Exiting order processing..." + ANSI_RESET);
                     return; // Exit the method
                 default:
-                    System.out.println("Invalid choice! Please try again.");
+                    System.out.println(ANSI_RED + "Invalid choice! Please try again." + ANSI_RESET);
                     break;
             }
         }
     }
 
     private void createOrder() {
-        System.out.println("Enter the table number:");
+        System.out.println(ANSI_YELLOW + "Enter the table number:" + ANSI_RESET);
         int tableNumber = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character due to INT*
 
@@ -95,10 +95,10 @@ public class OrderManagement {
         // Add the order to the map
         orders.put(order.getOrderId(), order);
 
-        System.out.println("Order created successfully. Order ID: " + orderId);
+        System.out.println(ANSI_CYAN + "Order created successfully. Order ID: " + orderId + ANSI_RESET);
 
 
-        System.out.println("Current Menu Items:");
+        System.out.println(ANSI_YELLOW + "Current Menu Items:"+ ANSI_RESET);
 
         List<MenuItems> menuItems = MenuManagement.getMenuItems();
         for (int i = 0; i < menuItems.size(); i++) {
@@ -106,7 +106,7 @@ public class OrderManagement {
             System.out.println((i + 1) + ". " + menuItem.getItemName());
         }
 
-        System.out.println("Select a menu item to add to the order (enter the item number):");
+        System.out.println(ANSI_YELLOW + "Select a menu item to add to the order (enter the item number):" + ANSI_RESET);
         int menuItemNumber = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character due to INT*
 
@@ -115,22 +115,22 @@ public class OrderManagement {
             order.getItemsOrdered().add(selectedMenuItem);
             double newPrice = order.getTotalPrice();
             order.setTotalPrice(newPrice+=selectedMenuItem.getItemPrice());
-            System.out.println("Menu item added to the order successfully.");
+            System.out.println(ANSI_CYAN + "Menu item added to the order successfully." + ANSI_RESET);
         } else {
-            System.out.println("Invalid menu item number. Item not added to the order.");
+            System.out.println(ANSI_RED + "Invalid menu item number. Item not added to the order." + ANSI_RESET);
         }
 
     }
 
 
     private void addToOrder() {
-        System.out.println("Enter the order ID:");
+        System.out.println(ANSI_YELLOW + "Enter the order ID:" + ANSI_RESET);
         int orderId = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character due to INT*
 
         Order order = getOrderById(orderId);
         if (order != null) {
-            System.out.println("Current Menu Items:");
+            System.out.println(ANSI_YELLOW + "Current Menu Items:" + ANSI_RESET);
 
             List<MenuItems> menuItems = MenuManagement.getMenuItems();
             for (int i = 0; i < menuItems.size(); i++) {
@@ -138,7 +138,7 @@ public class OrderManagement {
                 System.out.println((i + 1) + ". " + menuItem.getItemName());
             }
 
-            System.out.println("Select a menu item to add to the order (enter the item number):");
+            System.out.println( ANSI_YELLOW + "Select a menu item to add to the order (enter the item number):" + ANSI_RESET);
             int menuItemNumber = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character due to INT*
 
@@ -147,27 +147,27 @@ public class OrderManagement {
                 order.getItemsOrdered().add(selectedMenuItem);
                 double newPrice = order.getTotalPrice();
                 order.setTotalPrice(newPrice+=selectedMenuItem.getItemPrice());
-                System.out.println("Menu item added to the order successfully.");
+                System.out.println(ANSI_CYAN + "Menu item added to the order successfully." + ANSI_RESET);
             } else {
-                System.out.println("Invalid menu item number. Item not added to the order.");
+                System.out.println(ANSI_RED + "Invalid menu item number. Item not added to the order."+ ANSI_RESET);
             }
         } else {
-            System.out.println("Order not found.");
+            System.out.println(ANSI_RED + "Order not found." + ANSI_RESET);
         }
     }
 
 
     private void updateOrderStatus() {
-        System.out.println("Enter the order ID:");
+        System.out.println(ANSI_YELLOW + "Enter the order ID:" + ANSI_RESET);
         int orderId = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character due to INT*
 
         Order order = getOrderById(orderId);
         if (order != null) {
-            System.out.println("Select a new status:");
-            System.out.println("1. Waiting");
+            System.out.println(ANSI_YELLOW + "Select a new status:" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "1. Waiting");
             System.out.println("2. Preparing");
-            System.out.println("3. Ready");
+            System.out.println("3. Ready" + ANSI_RESET);
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character due to INT*
@@ -184,14 +184,14 @@ public class OrderManagement {
                     newStatus = "Ready";
                     break;
                 default:
-                    System.out.println("Invalid choice! Status not updated.");
+                    System.out.println(ANSI_RED + "Invalid choice! Status not updated." + ANSI_RESET);
                     return;
             }
 
             order.setStatus(newStatus);
-            System.out.println("Order status updated successfully.");
+            System.out.println(ANSI_CYAN + "Order status updated successfully." + ANSI_RESET);
         } else {
-            System.out.println("Order not found.");
+            System.out.println(ANSI_RED + "Order not found." + ANSI_RESET);
         }
     }
 
@@ -213,7 +213,7 @@ public class OrderManagement {
     }*/
 
 //    private void viewOrderDetails() {
-//        System.out.println("Enter the order ID:");
+//        System.out.println("Enter the ");
 //        int orderId = scanner.nextInt();
 //        scanner.nextLine(); // Consume the newline character due to INT*
 //
@@ -257,14 +257,14 @@ public class OrderManagement {
     }*/
 
     private void viewOrderDetails() {
-        System.out.println("Enter the order ID:");
+        System.out.println(ANSI_YELLOW + "Enter the order ID:" + ANSI_RESET);
         int orderId = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character due to INT*
 
         Order order = getOrderById(orderId);
         if (order != null) {
-            System.out.println("Order ID: " + order.getOrderId());
-            System.out.println("Table ID: " + order.getTableID());
+            System.out.println("Order ID: " + order.getOrderId() + ANSI_RESET);
+            System.out.println( "Table ID: " + order.getTableID() + ANSI_RESET);
 
 
             List<String> orderedItems = new ArrayList<>();
@@ -287,11 +287,11 @@ public class OrderManagement {
                 System.out.println(itemString);
             }
 
-            System.out.println("Order Subtotal: " + formatDecimal(orderSubtotal)); // Print the order subtotal
-            System.out.println("Total Price: " + formatDecimal(order.getTotalPrice()));
-            System.out.println("Order Status: " + order.getStatus());
+
+            System.out.println("Total Price: " + formatDecimal(order.getTotalPrice()) + ANSI_RESET);
+            System.out.println(ANSI_YELLOW + "Order Status: " + order.getStatus() + ANSI_RESET);
         } else {
-            System.out.println("Order not found.");
+            System.out.println(ANSI_RED + "Order not found." + ANSI_RESET);
         }
     }
 
@@ -372,7 +372,7 @@ public class OrderManagement {
                 }
             }
 
-            System.out.println("Items Ordered:");
+            System.out.println("Items Ordered:" + ANSI_RESET);
             for (String itemString : orderedItems) {
                 System.out.println(itemString);
             }
@@ -503,7 +503,15 @@ public class OrderManagement {
         return tableWithMostOrders;
     }
 
+    public static final String ANSI_RESET = "\u001B[0m";
 
+    public static final String ANSI_YELLOW = "\u001B[33m";
+
+    public static final String ANSI_GREEN = "\u001B[32m";
+
+    public static final String ANSI_RED = "\u001B[31m";
+
+    public static final String ANSI_CYAN = "\u001B[32m\u001B[36m";
 }
 
 

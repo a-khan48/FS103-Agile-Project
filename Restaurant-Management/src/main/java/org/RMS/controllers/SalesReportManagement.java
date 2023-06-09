@@ -16,12 +16,12 @@ public class SalesReportManagement {
         int choice;
 
         while (true) {
-            System.out.println("Select an option:");
-            System.out.println("1. Total Revenue");
+            System.out.println(ANSI_YELLOW + "Select an option:" + ANSI_RESET);
+            System.out.println(ANSI_GREEN + "1. Total Revenue");
             System.out.println("2. Most Popular Item");
             System.out.println("3. Table With Most Orders");
             System.out.println("4. Export To File");
-            System.out.println("0. Exit");
+            System.out.println("0. Exit" + ANSI_RESET);
 
             choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character due to INT*
@@ -30,18 +30,18 @@ public class SalesReportManagement {
                 case 1:
                     // Perform total revenue calculation
                     double totalRevenue = orderManagement.calculateTotalRevenue();
-                    System.out.println("Total Revenue: $" + totalRevenue);
+                    System.out.println(ANSI_YELLOW + "Total Revenue: $" + totalRevenue + ANSI_RESET);
                     break;
                 case 2:
                     // Find the most popular item
-                    System.out.println("Finding the most popular item...");
+                    System.out.println(ANSI_CYAN + "Finding the most popular item..." + ANSI_RESET);
                     int tableWithMostItems = orderManagement.rankMostOrderedItems();
                     break;
                 case 3:
                     // Find the table with the most orders
-                    System.out.println("Finding the table with the most orders...");
+                    System.out.println(ANSI_CYAN + "Finding the table with the most orders..." + ANSI_RESET);
                     int tableWithMostOrders = orderManagement.getTableWithMostOrders();
-                    System.out.println("Table with the most orders: " + tableWithMostOrders);
+                    System.out.println(ANSI_YELLOW + "Table with the most orders: " + tableWithMostOrders + ANSI_RESET);
                     break;
                 case 4:
                     // Export to a notepad txt file
@@ -52,7 +52,7 @@ public class SalesReportManagement {
                     // Exit
                     return;
                 default:
-                    System.out.println("Invalid choice! Please try again.");
+                    System.out.println(ANSI_RED + "Invalid choice! Please try again." + ANSI_RESET);
                     break;
             }
         }
@@ -92,4 +92,14 @@ public class SalesReportManagement {
             System.out.println("Error reading sales report: " + e.getMessage());
         }
     }
+
+    public static final String ANSI_RESET = "\u001B[0m";
+
+    public static final String ANSI_YELLOW = "\u001B[33m";
+
+    public static final String ANSI_GREEN = "\u001B[32m";
+
+    public static final String ANSI_RED = "\u001B[31m";
+
+    public static final String ANSI_CYAN = "\u001B[32m\u001B[36m";
 }
